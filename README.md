@@ -1,4 +1,4 @@
-# Livro:Bancos de Dados Espaciais
+# Livro: Bancos de Dados Espaciais
 
 Este repositório contém os recursos relacionados ao livro "Introdução a Bancos de Dados Espaciais". O livro aborda os conceitos fundamentais, técnicas e aplicações de bancos de dados espaciais, com ênfase no Sistema Gerenciador de Banco de Dados PostgreSQL e sua extensão espacial PostGIS. Utilizaremos ainda o Python para demonstrar como aplicar esses conceitos na prática.
 
