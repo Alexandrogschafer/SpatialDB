@@ -4,7 +4,7 @@ Este repositório contém os recursos relacionados ao livro "Introdução a Banc
 
 ## Conteúdo
 
-- [Capítulos](/capitulos): Neste diretório, você encontrará os capítulos do livro em formato Markdown.
+- [Capítulos](/https://alexandrogschafer.github.io/Spatial-Database/intro.html): Neste diretório, você encontrará os capítulos do livro em formato Markdown.
 - [Exemplos de Código](/exemplos-de-codigo): Aqui estão exemplos de código mencionados no livro, juntamente com instruções para execução.
 - [Recursos Adicionais](/recursos-adicionais): Links e recursos complementares para expandir o conhecimento sobre bancos de dados espaciais.
 
