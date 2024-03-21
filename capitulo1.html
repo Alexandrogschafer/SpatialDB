@@ -62,7 +62,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'capitulo1';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. INTRODUÇÃO AO SQL (STRUCTURED QUERY LANGUAGE)" href="capitulo2.html" />
+    <link rel="next" title="2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)" href="capitulo2.html" />
     <link rel="prev" title="Bancos de Dados Espaciais" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -167,7 +167,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">1. FUNDAMENTOS DE BANCOS DE DADOS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="capitulo2.html">2. INTRODUÇÃO AO SQL (STRUCTURED QUERY LANGUAGE)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo2.html">2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencias.html">Referências Bibliográficas</a></li>
 </ul>
 
@@ -482,7 +482,7 @@ document.write(`
 <p>Os bancos de dados relacionais, fundamentados nos princípios da matemática relacional (para saber mais sobre matemática relacional, você pode consultar Schmidt, 2010), representam informações em tabelas, que são estruturas compostas por linhas e colunas. Cada tabela (também chamada de relação) é uma entidade que contém um conjunto de dados relacionados, onde as colunas representam os atributos dessa entidade, como nome, idade ou endereço, e as linhas representam registros individuais, ou seja, instâncias específicas da entidade. Esta estrutura é intuitiva e permite um tipo de acesso aos dados que é muito eficiente para diversas operações de consulta e atualização.</p>
 <p>Um conceito importante no contexto dos bancos de dados relacionais é o de chaves primárias e estrangeiras, que estabelecem a integridade dos dados e as relações entre as tabelas. Uma chave primária é uma coluna ou um conjunto de colunas que identifica de maneira única cada linha da tabela. Em outras palavras, não pode haver dois registros com a mesma chave primária, o que garante a unicidade dos dados. Por outro lado, uma chave estrangeira é uma coluna em uma tabela que é a chave primária de outra tabela. As chaves estrangeiras são essenciais para manter as relações entre diferentes entidades no banco de dados, permitindo que uma tabela faça referência a outra. No modelo lógico simplificado da figura abaixo, temos duas tabelas: estado e região.</p>
 <p><img alt="Figura 1" src="_images/fig1.png" /></p>
-<p>Na figura apresentada (referida no texto original, mas não inclusa aqui), a chave primária da tabela <code class="docutils literal notranslate"><span class="pre">estado</span></code> é <code class="docutils literal notranslate"><span class="pre">cod_uf</span></code>, o que significa que <code class="docutils literal notranslate"><span class="pre">cod_uf</span></code> identifica unicamente cada estado no banco de dados. Isso implica que cada estado terá um <code class="docutils literal notranslate"><span class="pre">cod_uf</span></code> exclusivo. Por sua vez, <code class="docutils literal notranslate"><span class="pre">cod_rg</span></code> é a chave primária na tabela <code class="docutils literal notranslate"><span class="pre">região</span></code>, identificando unicamente cada região. Além disso, <code class="docutils literal notranslate"><span class="pre">cod_rg</span></code> também atua como uma chave estrangeira na tabela <code class="docutils literal notranslate"><span class="pre">estado</span></code>, estabelecendo uma ligação direta entre cada estado e sua respectiva região. Isso permite que informações relacionadas a uma região sejam associadas a estados específicos, facilitando consultas relacionais que podem combinar dados de ambas as tabelas com base nessa relação. Essa estrutura promove a integridade referencial dentro do banco de dados, garantindo que os dados estejam consistentemente relacionados entre si e que as relações entre diferentes entidades sejam mantidas corretamente.</p>
+<p>Na figura apresentada, a chave primária da tabela <code class="docutils literal notranslate"><span class="pre">estado</span></code> é <code class="docutils literal notranslate"><span class="pre">cod_uf</span></code>, o que significa que <code class="docutils literal notranslate"><span class="pre">cod_uf</span></code> identifica unicamente cada estado no banco de dados. Isso implica que cada estado terá um <code class="docutils literal notranslate"><span class="pre">cod_uf</span></code> exclusivo. Por sua vez, <code class="docutils literal notranslate"><span class="pre">cod_rg</span></code> é a chave primária na tabela <code class="docutils literal notranslate"><span class="pre">região</span></code>, identificando unicamente cada região. Além disso, <code class="docutils literal notranslate"><span class="pre">cod_rg</span></code> também atua como uma chave estrangeira na tabela <code class="docutils literal notranslate"><span class="pre">estado</span></code>, estabelecendo uma ligação direta entre cada estado e sua respectiva região. Isso permite que informações relacionadas a uma região sejam associadas a estados específicos, facilitando consultas relacionais que podem combinar dados de ambas as tabelas com base nessa relação. Essa estrutura promove a integridade referencial dentro do banco de dados, garantindo que os dados estejam consistentemente relacionados entre si e que as relações entre diferentes entidades sejam mantidas corretamente.</p>
 <p>Os relacionamentos entre tabelas são categorizados principalmente em três tipos: um-para-um, um-para-muitos, e muitos-para-muitos:</p>
 <ul class="simple">
 <li><p><strong>Um-para-um:</strong> Cada linha em uma tabela está associada a uma e apenas uma linha em outra tabela. Por exemplo, uma pessoa pode ter apenas um passaporte, e cada passaporte é emitido para apenas uma pessoa.</p></li>
@@ -669,7 +669,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2. INTRODUÇÃO AO SQL (STRUCTURED QUERY LANGUAGE)</p>
+        <p class="prev-next-title">2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

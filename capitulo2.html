@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. INTRODUÇÃO AO SQL (STRUCTURED QUERY LANGUAGE) &#8212; Bancos de Dados Espaciais</title>
+    <title>2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL) &#8212; Bancos de Dados Espaciais</title>
   
   
   
@@ -167,7 +167,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="capitulo1.html">1. FUNDAMENTOS DE BANCOS DE DADOS</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. INTRODUÇÃO AO SQL (STRUCTURED QUERY LANGUAGE)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencias.html">Referências Bibliográficas</a></li>
 </ul>
 
@@ -354,7 +354,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>2. INTRODUÇÃO AO SQL (STRUCTURED QUERY LANGUAGE)</h1>
+    <h1>2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -410,12 +410,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="introducao-ao-sql-structured-query-language">
-<h1>2. INTRODUÇÃO AO SQL (STRUCTURED QUERY LANGUAGE)<a class="headerlink" href="#introducao-ao-sql-structured-query-language" title="Permalink to this heading">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="introducao-a-structured-query-language-sql">
+<h1>2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)<a class="headerlink" href="#introducao-a-structured-query-language-sql" title="Permalink to this heading">#</a></h1>
 <p><a class="reference external" href="https://colab.research.google.com/https://github.com/Alexandrogschafer/Spatial-Database/blob/gh-pages/notebooks/capitulo2.ipynb">Abrir no Google Colab</a></p>
-<p>SQL, que significa “Structured Query Language”, é a linguagem de programação padrão usada para comunicar e manipular bancos de dados relacionais. Desde sua criação, tem sido uma ferramenta indispensável para os profissionais de banco de dados, permitindo-lhes criar, modificar, gerenciar e consultar dados de forma eficaz. O poder do SQL reside em sua capacidade de lidar com conjuntos de dados grandes e complexos com comandos concisos e expressões bem definidas. Através de suas instruções de consulta, é possível não só realizar operações básicas de CRUD (Criar, Ler, Atualizar e Deletar dados), mas também executar tarefas avançadas como transações de dados, manipulação de esquemas de banco de dados e controle de acesso.</p>
+<p>SQL, que significa “Structured Query Language”, é a linguagem de programação padrão usada para comunicar e manipular bancos de dados relacionais. Desde sua criação, tem sido uma ferramenta indispensável para os profissionais de banco de dados, permitindo-lhes criar, modificar, gerenciar e consultar dados de forma eficaz. O poder do SQL reside em sua capacidade de lidar com conjuntos de dados grandes e complexos com comandos concisos e expressões bem definidas.</p>
+<p>Através de suas instruções de consulta, é possível não só realizar operações básicas de CRUD (Criar, Ler, Atualizar e Deletar dados), mas também executar tarefas avançadas como transações de dados, manipulação de esquemas de banco de dados e controle de acesso.</p>
 <p>Diferentemente de outras linguagens de programação, como Java ou Python, que são linguagens de propósito geral, o SQL é especializado para a gestão de dados dentro de um SGBD relacional. Enquanto linguagens de propósito geral podem ser utilizadas para desenvolver aplicações diversas — de jogos a algoritmos de aprendizado de máquina —, o SQL é projetado especificamente para trabalhar com dados relacionais. Ele utiliza uma abordagem declarativa: o usuário especifica o que deseja fazer sem descrever todos os passos necessários para realizar a tarefa. Por exemplo, ao invés de iterar sobre linhas de dados como faria em uma linguagem de programação convencional, um usuário SQL simplesmente declara que deseja selecionar dados de uma tabela sob certas condições, e o sistema de gerenciamento do banco de dados trata de encontrar a forma mais eficiente de executar essa requisição.</p>
-<p>O SQL distingue-se ainda por ser fortemente baseado em álgebra relacional e cálculo de tuplas, fundamentos teóricos que garantem não só a sua robustez, mas também a sua adaptabilidade e durabilidade ao longo do tempo. Esta especialização faz do SQL a escolha ideal para situações em que a manipulação de dados é primordial, garantindo que os usuários possam realizar consultas complexas e manter a integridade dos dados com um mínimo de instruções. A despeito das inúmeras extensões e variações que surgiram para atender a necessidades específicas, o SQL mantém uma sintaxe e funcionalidade consistentes que facilitam a portabilidade entre diferentes sistemas de banco de dados e a aprendizagem por novos usuários, assegurando o seu lugar como a linguagem dominante no campo do gerenciamento de dados relacionais.</p>
+<p>O SQL distingue-se ainda por ser fortemente baseado em álgebra relacional e cálculo de tuplas, fundamentos teóricos que garantem não só a sua robustez, mas também a sua adaptabilidade e durabilidade ao longo do tempo. Esta especialização faz do SQL a escolha ideal para situações em que a manipulação de dados é primordial, garantindo que os usuários possam realizar consultas complexas e manter a integridade dos dados com um mínimo de instruções.</p>
+<p>A despeito das inúmeras extensões e variações que surgiram para atender a necessidades específicas, o SQL mantém uma sintaxe e funcionalidade consistentes que facilitam a portabilidade entre diferentes sistemas de banco de dados e a aprendizagem por novos usuários, assegurando o seu lugar como a linguagem dominante no campo do gerenciamento de dados relacionais.</p>
 <div class="section" id="breve-historico-do-sql">
 <h2>2.1 Breve histórico do SQL<a class="headerlink" href="#breve-historico-do-sql" title="Permalink to this heading">#</a></h2>
 <p>A linguagem SQL (Structured Query Language) tem uma história de desenvolvimento relativamente longa, desde suas origens até seu papel central nos sistemas de gerenciamento de banco de dados modernos.</p>
@@ -1034,7 +1036,7 @@ FROM pg_stat_activity;
         <tr>
             <td>None</td>
             <td>None</td>
-            <td>1489</td>
+            <td>1508</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1042,7 +1044,7 @@ FROM pg_stat_activity;
             <td>None</td>
             <td>None</td>
             <td>None</td>
-            <td>2024-03-19 07:11:39.245159-03:00</td>
+            <td>2024-03-20 09:12:20.652604-03:00</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1058,7 +1060,7 @@ FROM pg_stat_activity;
         <tr>
             <td>None</td>
             <td>None</td>
-            <td>1490</td>
+            <td>1509</td>
             <td>None</td>
             <td>10</td>
             <td>postgres</td>
@@ -1066,7 +1068,7 @@ FROM pg_stat_activity;
             <td>None</td>
             <td>None</td>
             <td>None</td>
-            <td>2024-03-19 07:11:39.245691-03:00</td>
+            <td>2024-03-20 09:12:20.653353-03:00</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1080,20 +1082,20 @@ FROM pg_stat_activity;
             <td>logical replication launcher</td>
         </tr>
         <tr>
-            <td>17998</td>
+            <td>18197</td>
             <td>bd_censo_ibge</td>
-            <td>42002</td>
+            <td>30993</td>
             <td>None</td>
             <td>10</td>
             <td>postgres</td>
             <td></td>
             <td>127.0.0.1</td>
             <td>None</td>
-            <td>54848</td>
-            <td>2024-03-19 18:38:38.290414-03:00</td>
+            <td>58466</td>
+            <td>2024-03-20 20:50:42.504433-03:00</td>
             <td>None</td>
             <td>None</td>
-            <td>2024-03-19 18:38:38.306434-03:00</td>
+            <td>2024-03-20 20:50:42.521350-03:00</td>
             <td>Client</td>
             <td>ClientRead</td>
             <td>idle</td>
@@ -1104,25 +1106,25 @@ FROM pg_stat_activity;
             <td>client backend</td>
         </tr>
         <tr>
-            <td>17998</td>
+            <td>18197</td>
             <td>bd_censo_ibge</td>
-            <td>42007</td>
+            <td>30998</td>
             <td>None</td>
             <td>10</td>
             <td>postgres</td>
             <td></td>
             <td>127.0.0.1</td>
             <td>None</td>
-            <td>54856</td>
-            <td>2024-03-19 18:38:38.730895-03:00</td>
-            <td>2024-03-19 18:38:38.824317-03:00</td>
-            <td>2024-03-19 18:38:38.824427-03:00</td>
-            <td>2024-03-19 18:38:38.824428-03:00</td>
+            <td>58478</td>
+            <td>2024-03-20 20:50:42.950004-03:00</td>
+            <td>2024-03-20 20:50:43.039890-03:00</td>
+            <td>2024-03-20 20:50:43.039996-03:00</td>
+            <td>2024-03-20 20:50:43.039997-03:00</td>
             <td>None</td>
             <td>None</td>
             <td>active</td>
             <td>None</td>
-            <td>1352</td>
+            <td>1429</td>
             <td>None</td>
             <td>SELECT * <br>FROM pg_stat_activity;</td>
             <td>client backend</td>
@@ -1130,7 +1132,7 @@ FROM pg_stat_activity;
         <tr>
             <td>None</td>
             <td>None</td>
-            <td>1482</td>
+            <td>1503</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1138,7 +1140,7 @@ FROM pg_stat_activity;
             <td>None</td>
             <td>None</td>
             <td>None</td>
-            <td>2024-03-19 07:11:39.207509-03:00</td>
+            <td>2024-03-20 09:12:20.606062-03:00</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1154,7 +1156,7 @@ FROM pg_stat_activity;
         <tr>
             <td>None</td>
             <td>None</td>
-            <td>1481</td>
+            <td>1502</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1162,7 +1164,7 @@ FROM pg_stat_activity;
             <td>None</td>
             <td>None</td>
             <td>None</td>
-            <td>2024-03-19 07:11:39.206815-03:00</td>
+            <td>2024-03-20 09:12:20.605385-03:00</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1178,7 +1180,7 @@ FROM pg_stat_activity;
         <tr>
             <td>None</td>
             <td>None</td>
-            <td>1488</td>
+            <td>1507</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1186,7 +1188,7 @@ FROM pg_stat_activity;
             <td>None</td>
             <td>None</td>
             <td>None</td>
-            <td>2024-03-19 07:11:39.244501-03:00</td>
+            <td>2024-03-20 09:12:20.651953-03:00</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1633,9 +1635,7 @@ WHERE table_name = &#39;censo_mun&#39;;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8 rows affected.
+8 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -1717,7 +1717,7 @@ WHERE table_name = &#39;censo_mun&#39;;
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
 ALTER TABLE &quot;censo_mun&quot; ADD FOREIGN KEY (&quot;cod_rgi&quot;) REFERENCES &quot;regiao_imed&quot; (&quot;cod_rgi&quot;);
 ALTER TABLE &quot;censo_mun&quot; ADD FOREIGN KEY (&quot;cod_rgint&quot;) REFERENCES &quot;regiao_inter&quot; (&quot;cod_rgint&quot;);
-ALTER TABLE &quot;ALTER TABLE &quot;censo_mun&quot; ADD FOREIGN KEY (&quot;cod_rgint&quot;) REFERENCES &quot;regiao_inter&quot; (&quot;cod_rgint&quot;);&quot; ADD FOREIGN KEY (&quot;cod_uf&quot;) REFERENCES &quot;estado&quot; (&quot;cod_uf&quot;);
+ALTER TABLE &quot;censo_mun&quot; ADD FOREIGN KEY (&quot;cod_uf&quot;) REFERENCES &quot;estado&quot; (&quot;cod_uf&quot;);
 ALTER TABLE &quot;regiao_imed&quot; ADD FOREIGN KEY (&quot;cod_rgint&quot;) REFERENCES &quot;regiao_inter&quot; (&quot;cod_rgint&quot;);
 ALTER TABLE &quot;regiao_inter&quot; ADD FOREIGN KEY (&quot;cod_uf&quot;) REFERENCES &quot;estado&quot; (&quot;cod_uf&quot;);
 ALTER TABLE &quot;estado&quot; ADD FOREIGN KEY (&quot;cod_rg&quot;) REFERENCES &quot;regiao&quot; (&quot;cod_rg&quot;);
@@ -1730,12 +1730,15 @@ ALTER TABLE &quot;estado&quot; ADD FOREIGN KEY (&quot;cod_rg&quot;) REFERENCES &
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
 Done.
-(psycopg2.errors.SyntaxError) syntax error at or near &quot;censo_mun&quot;
-LINE 1: ALTER TABLE &quot;ALTER TABLE &quot;censo_mun&quot; ADD FOREIGN KEY (&quot;cod_r...
-                                  ^
-
-[SQL: ALTER TABLE &quot;ALTER TABLE &quot;censo_mun&quot; ADD FOREIGN KEY (&quot;cod_rgint&quot;) REFERENCES &quot;regiao_inter&quot; (&quot;cod_rgint&quot;);&quot; ADD FOREIGN KEY (&quot;cod_uf&quot;) REFERENCES &quot;estado&quot; (&quot;cod_uf&quot;);]
-(Background on this error at: https://sqlalche.me/e/20/f405)
+Done.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
+Done.
+Done.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
 </pre></div>
 </div>
 </div>
@@ -1836,11 +1839,11 @@ ALTER TABLE &quot;censo_mun&quot; ADD FOREIGN KEY (&quot;cod_uf&quot;) REFERENCE
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
+Done.
+Done.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
-Done.
-Done.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
@@ -1911,9 +1914,7 @@ SELECT * FROM regiao;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 rows affected.
+5 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -1984,9 +1985,7 @@ INSERT INTO estado (cod_uf, nome_uf, sigla_uf, cod_rg) VALUES
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
+27 rows affected.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
@@ -2923,6 +2922,9 @@ WHERE table_schema = &#39;public&#39;;
     </thead>
     <tbody>
         <tr>
+            <td>estado</td>
+        </tr>
+        <tr>
             <td>regiao</td>
         </tr>
         <tr>
@@ -2933,9 +2935,6 @@ WHERE table_schema = &#39;public&#39;;
         </tr>
         <tr>
             <td>censo_mun</td>
-        </tr>
-        <tr>
-            <td>estado</td>
         </tr>
     </tbody>
 </table></div></div>
@@ -3086,9 +3085,7 @@ FROM estado;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
+27 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -3475,7 +3472,9 @@ FROM estado;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-5 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -3515,9 +3514,7 @@ FROM censo_mun;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 rows affected.
+1 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -3843,7 +3840,9 @@ ORDER BY nome_uf DESC;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-27 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -4059,9 +4058,7 @@ WHERE cod_rg = 2;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9 rows affected.
+9 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -4124,9 +4121,7 @@ WHERE cod_rg != 2;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18 rows affected.
+18 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -4954,7 +4949,9 @@ ORDER BY nome_uf ASC;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-27 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5228,9 +5225,7 @@ LIMIT 6;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6 rows affected.
+6 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5694,7 +5689,9 @@ HAVING SUM(popul_2022) &lt; 1000000;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-3 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -6512,7 +6509,9 @@ WHERE UsuarioID = 4;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-1 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 rows affected.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
@@ -7136,9 +7135,7 @@ INNER JOIN
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
+Done.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
@@ -7298,7 +7295,9 @@ LIMIT 15;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-15 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -7509,9 +7508,7 @@ LIMIT 20;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20 rows affected.
+20 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>

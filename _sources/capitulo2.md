@@ -14,15 +14,19 @@ kernelspec:
 
 
 
-# 2. INTRODUÇÃO AO SQL (STRUCTURED QUERY LANGUAGE)
+# 2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)
 
 [Abrir no Google Colab](https://colab.research.google.com/https://github.com/Alexandrogschafer/Spatial-Database/blob/gh-pages/notebooks/capitulo2.ipynb)
 
-SQL, que significa "Structured Query Language", é a linguagem de programação padrão usada para comunicar e manipular bancos de dados relacionais. Desde sua criação, tem sido uma ferramenta indispensável para os profissionais de banco de dados, permitindo-lhes criar, modificar, gerenciar e consultar dados de forma eficaz. O poder do SQL reside em sua capacidade de lidar com conjuntos de dados grandes e complexos com comandos concisos e expressões bem definidas. Através de suas instruções de consulta, é possível não só realizar operações básicas de CRUD (Criar, Ler, Atualizar e Deletar dados), mas também executar tarefas avançadas como transações de dados, manipulação de esquemas de banco de dados e controle de acesso.
+SQL, que significa "Structured Query Language", é a linguagem de programação padrão usada para comunicar e manipular bancos de dados relacionais. Desde sua criação, tem sido uma ferramenta indispensável para os profissionais de banco de dados, permitindo-lhes criar, modificar, gerenciar e consultar dados de forma eficaz. O poder do SQL reside em sua capacidade de lidar com conjuntos de dados grandes e complexos com comandos concisos e expressões bem definidas. 
+
+Através de suas instruções de consulta, é possível não só realizar operações básicas de CRUD (Criar, Ler, Atualizar e Deletar dados), mas também executar tarefas avançadas como transações de dados, manipulação de esquemas de banco de dados e controle de acesso.
 
 Diferentemente de outras linguagens de programação, como Java ou Python, que são linguagens de propósito geral, o SQL é especializado para a gestão de dados dentro de um SGBD relacional. Enquanto linguagens de propósito geral podem ser utilizadas para desenvolver aplicações diversas — de jogos a algoritmos de aprendizado de máquina —, o SQL é projetado especificamente para trabalhar com dados relacionais. Ele utiliza uma abordagem declarativa: o usuário especifica o que deseja fazer sem descrever todos os passos necessários para realizar a tarefa. Por exemplo, ao invés de iterar sobre linhas de dados como faria em uma linguagem de programação convencional, um usuário SQL simplesmente declara que deseja selecionar dados de uma tabela sob certas condições, e o sistema de gerenciamento do banco de dados trata de encontrar a forma mais eficiente de executar essa requisição.
 
-O SQL distingue-se ainda por ser fortemente baseado em álgebra relacional e cálculo de tuplas, fundamentos teóricos que garantem não só a sua robustez, mas também a sua adaptabilidade e durabilidade ao longo do tempo. Esta especialização faz do SQL a escolha ideal para situações em que a manipulação de dados é primordial, garantindo que os usuários possam realizar consultas complexas e manter a integridade dos dados com um mínimo de instruções. A despeito das inúmeras extensões e variações que surgiram para atender a necessidades específicas, o SQL mantém uma sintaxe e funcionalidade consistentes que facilitam a portabilidade entre diferentes sistemas de banco de dados e a aprendizagem por novos usuários, assegurando o seu lugar como a linguagem dominante no campo do gerenciamento de dados relacionais.
+O SQL distingue-se ainda por ser fortemente baseado em álgebra relacional e cálculo de tuplas, fundamentos teóricos que garantem não só a sua robustez, mas também a sua adaptabilidade e durabilidade ao longo do tempo. Esta especialização faz do SQL a escolha ideal para situações em que a manipulação de dados é primordial, garantindo que os usuários possam realizar consultas complexas e manter a integridade dos dados com um mínimo de instruções. 
+
+A despeito das inúmeras extensões e variações que surgiram para atender a necessidades específicas, o SQL mantém uma sintaxe e funcionalidade consistentes que facilitam a portabilidade entre diferentes sistemas de banco de dados e a aprendizagem por novos usuários, assegurando o seu lugar como a linguagem dominante no campo do gerenciamento de dados relacionais.
 
 
 ## 2.1 Breve histórico do SQL
@@ -777,10 +781,11 @@ Para adicionar as chaves estrangeiras às tabelas, de acordo com o modelo lógic
 %%sql
 ALTER TABLE "censo_mun" ADD FOREIGN KEY ("cod_rgi") REFERENCES "regiao_imed" ("cod_rgi");
 ALTER TABLE "censo_mun" ADD FOREIGN KEY ("cod_rgint") REFERENCES "regiao_inter" ("cod_rgint");
-ALTER TABLE "ALTER TABLE "censo_mun" ADD FOREIGN KEY ("cod_rgint") REFERENCES "regiao_inter" ("cod_rgint");" ADD FOREIGN KEY ("cod_uf") REFERENCES "estado" ("cod_uf");
+ALTER TABLE "censo_mun" ADD FOREIGN KEY ("cod_uf") REFERENCES "estado" ("cod_uf");
 ALTER TABLE "regiao_imed" ADD FOREIGN KEY ("cod_rgint") REFERENCES "regiao_inter" ("cod_rgint");
 ALTER TABLE "regiao_inter" ADD FOREIGN KEY ("cod_uf") REFERENCES "estado" ("cod_uf");
 ALTER TABLE "estado" ADD FOREIGN KEY ("cod_rg") REFERENCES "regiao" ("cod_rg");
+
 ```
 
 Estes comandos adicionam chaves estrangeiras às tabelas `censo_mun`, `regiao_imed`, `regiao_inter`, `estado` e `regiao`, estabelecendo relações "muitos para um" entre essas tabelas. Isso garante a integridade dos dados, assegurando que os valores nas colunas de chaves estrangeiras correspondam aos valores existentes nas colunas de chaves primárias das tabelas referenciadas.
