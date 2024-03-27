@@ -375,6 +375,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bancos-de-dados-distribuidos">Bancos de Dados Distribuídos</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bancos-de-dados-orientados-a-objetos">Bancos de Dados Orientados a Objetos</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bancos-de-dados-multimodelo">Bancos de Dados Multimodelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-dados-estruturados-semi-estruturados-e-nao-estruturados">1.3.1 Tipos de dados: estruturados, semi-estruturados e não estruturados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escalabilidade-em-bancos-de-dados">1.3.2 Escalabilidade em bancos de dados</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bancos-de-dados-relacionais">1.4 Bancos de dados relacionais</a><ul class="nav section-nav flex-column">
@@ -443,7 +445,7 @@ document.write(`
 </div>
 <div class="section" id="bancos-de-dados-nosql">
 <h3>Bancos de Dados NoSQL<a class="headerlink" href="#bancos-de-dados-nosql" title="Permalink to this heading">#</a></h3>
-<p>O termo “NoSQL” se refere a “not only SQL”, indicando bancos de dados projetados para armazenar e recuperar dados que não requerem o modelo tabular dos bancos de dados relacionais. São ideais para dados não estruturados ou semi-estruturados e são conhecidos pela sua escalabilidade e performance em grandes volumes de dados. Os tipos incluem:</p>
+<p>O termo “NoSQL” se refere a “not only SQL”, indicando bancos de dados projetados para armazenar e recuperar dados que não requerem o modelo tabular dos bancos de dados relacionais. São ideais para dados não estruturados ou semi-estruturados e são conhecidos pela sua escalabilidade e performance em grandes volumes de dados. Exemplos de dados estruturados, semi-estruturados e não estruturados são apresentados na seçao 1.3.1 Os tipos incluem:</p>
 <ul class="simple">
 <li><p><strong>Bancos de Dados de Documentos:</strong> Armazenam dados em documentos, geralmente formatados em JSON ou XML. Exemplos: MongoDB, CouchDB.</p></li>
 <li><p><strong>Bancos de Dados de Chave-Valor:</strong> Cada item é armazenado como uma chave e um valor correspondente. Exemplos: Redis, DynamoDB.</p></li>
@@ -475,6 +477,202 @@ document.write(`
 <h3>Bancos de Dados Multimodelo<a class="headerlink" href="#bancos-de-dados-multimodelo" title="Permalink to this heading">#</a></h3>
 <p>Estes bancos de dados suportam vários modelos de dados, como documentos, grafos e chave-valor, permitindo ao desenvolvedore escolher a melhor abordagem para cada situação. Exemplo: ArangoDB, OrientDB.</p>
 <p>Cada tipo de banco de dados apresenta vantagens e desvantagens e é adequado para diferentes casos de uso. A seleção de um banco de dados geralmente depende de vários fatores, incluindo o tipo e o volume dos dados, as operações de consulta necessárias, performance, escalabilidade e consistência exigidas pelo sistema de aplicação.</p>
+</div>
+<div class="section" id="tipos-de-dados-estruturados-semi-estruturados-e-nao-estruturados">
+<h3>1.3.1 Tipos de dados: estruturados, semi-estruturados e não estruturados<a class="headerlink" href="#tipos-de-dados-estruturados-semi-estruturados-e-nao-estruturados" title="Permalink to this heading">#</a></h3>
+<p>Os dados podem ser classificados em estruturados, semi-estruturados e não estruturados, dependendo do grau de organização e da facilidade com que podem ser analisados e acessados por algoritmos. Aqui estão alguns exemplos concretos para ilustrá-los:</p>
+<p><strong>Dados estruturados</strong></p>
+<p>Os dados estruturados são aqueles organizados de forma clara e lógica, geralmente armazenados em tabelas com linhas e colunas bem definidas, facilitando a busca, o acesso e a análise dos dados. Eles seguem um modelo rígido, como um banco de dados relacional, onde cada tipo de informação (campo) é predeterminado e organizado de forma estruturada. Aqui estão alguns exemplos concretos:</p>
+<p>Exemplos:</p>
+<p><em>1. Bancos de Dados Relacionais:</em></p>
+<p>São a forma mais comum de armazenamento de dados estruturados, onde os dados são organizados em tabelas. Cada tabela tem colunas (atributos) e linhas (registros).</p>
+<ul class="simple">
+<li><p>Tabela de Clientes:</p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>ClienteID</p></th>
+<th class="head"><p>Nome</p></th>
+<th class="head"><p>Email</p></th>
+<th class="head"><p>Telefone</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>João Silva</p></td>
+<td><p><a class="reference external" href="mailto:joao&#46;silva&#37;&#52;&#48;email&#46;com">joao<span>&#46;</span>silva<span>&#64;</span>email<span>&#46;</span>com</a></p></td>
+<td><p>(11) 9999-9999</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Maria Lima</p></td>
+<td><p><a class="reference external" href="mailto:maria&#46;lima&#37;&#52;&#48;email&#46;com">maria<span>&#46;</span>lima<span>&#64;</span>email<span>&#46;</span>com</a></p></td>
+<td><p>(21) 8888-8888</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Tabela de Pedidos:</p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>PedidoID</p></th>
+<th class="head"><p>ClienteID</p></th>
+<th class="head"><p>DataPedido</p></th>
+<th class="head"><p>ValorTotal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1001</p></td>
+<td><p>1</p></td>
+<td><p>2023-03-15</p></td>
+<td><p>500.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>1002</p></td>
+<td><p>2</p></td>
+<td><p>2023-03-16</p></td>
+<td><p>300.00</p></td>
+</tr>
+</tbody>
+</table>
+<p>Estas tabelas podem ser relacionadas através do <code class="docutils literal notranslate"><span class="pre">ClienteID</span></code>, permitindo consultas complexas e relatórios.</p>
+<p><em>2. Planilhas Eletrônicas:</em></p>
+<p>Similar aos bancos de dados, mas geralmente usadas para armazenamento de dados e análise em menor escala. As planilhas organizam os dados em células dentro de colunas e linhas, com a possibilidade de realizar cálculos e visualizações.</p>
+<ul class="simple">
+<li><p><em>Planilha de Orçamento Familiar:</em></p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mês</p></th>
+<th class="head"><p>Despesa</p></th>
+<th class="head"><p>Categoria</p></th>
+<th class="head"><p>Valor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Janeiro</p></td>
+<td><p>Supermercado</p></td>
+<td><p>Alimentação</p></td>
+<td><p>R$ 600,00</p></td>
+</tr>
+<tr class="row-odd"><td><p>Janeiro</p></td>
+<td><p>Conta de Luz</p></td>
+<td><p>Moradia</p></td>
+<td><p>R$ 200,00</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>3. Sistemas de Gestão de Cliente (CRM):</em></p>
+<p>Sistemas CRM são exemplos de aplicativos que utilizam intensivamente dados estruturados para gerenciar informações sobre clientes, suas interações e históricos de compra.</p>
+<ul class="simple">
+<li><p><em>Dados de Cliente no CRM:</em></p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>ClienteID</p></th>
+<th class="head"><p>Nome</p></th>
+<th class="head"><p>Segmento</p></th>
+<th class="head"><p>ÚltimaCompra</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>João</p></td>
+<td><p>Tecnologia</p></td>
+<td><p>2023-03-01</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Maria</p></td>
+<td><p>Saúde</p></td>
+<td><p>2023-02-24</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>4. Sistemas de Recursos Humanos:</em></p>
+<p>Bancos de dados de RH contêm informações detalhadas sobre funcionários, incluindo dados pessoais, histórico de emprego, salários e benefícios.</p>
+<ul class="simple">
+<li><p><em>Tabela de Funcionários:</em></p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>FuncID</p></th>
+<th class="head"><p>Nome</p></th>
+<th class="head"><p>Departamento</p></th>
+<th class="head"><p>Salário</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>101</p></td>
+<td><p>Ana</p></td>
+<td><p>Finanças</p></td>
+<td><p>R$ 7.000</p></td>
+</tr>
+<tr class="row-odd"><td><p>102</p></td>
+<td><p>Pedro</p></td>
+<td><p>TI</p></td>
+<td><p>R$ 9.000</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Dados semi-estruturados</strong></p>
+<p>Os dados semi-estruturados não seguem uma estrutura rígida de banco de dados como tabelas SQL, mas ainda contêm <em>tags</em> ou outros marcadores para separar elementos semânticos e, portanto, podem ser mais facilmente analisados do que dados não estruturados. Eles são flexíveis e podem representar hierarquias de informações.</p>
+<p>Exemplos:</p>
+<ul class="simple">
+<li><p><em>JSON (JavaScript Object Notation):</em> Muito usado em APIs web e configurações, o JSON organiza dados em um formato legível por humanos e máquinas, com estruturas de chave-valor que podem ser aninhadas.</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+  &quot;nome&quot;: &quot;João Silva&quot;,
+  &quot;idade&quot;: 30,
+   endereço&quot;: {
+    &quot;rua&quot;: &quot;Rua das Flores&quot;,
+    &quot;cidade&quot;: &quot;São Paulo&quot;,
+    &quot;CEP&quot;: &quot;01002-000&quot;
+  }
+}
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><em>XML (eXtensible Markup Language):</em> Utilizado para armazenar e transportar dados, com uma estrutura de tags que define os elementos e os atributos dos dados.</p></li>
+</ul>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;funcionario&gt;</span>
+<span class="w">  </span><span class="nt">&lt;nome&gt;</span>João<span class="w"> </span>Silva<span class="nt">&lt;/nome&gt;</span>
+<span class="w">  </span><span class="nt">&lt;idade&gt;</span>30<span class="nt">&lt;/idade&gt;</span>
+<span class="w">  </span><span class="nt">&lt;endereço</span><span class="w"> </span><span class="na">rua=</span><span class="s">&quot;Rua das Flores&quot;</span><span class="w"> </span><span class="na">cidade=</span><span class="s">&quot;São Paulo&quot;</span><span class="w"> </span><span class="na">CEP=</span><span class="s">&quot;01002-000&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/funcionario&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><em>YAML (YAML Ain’t Markup Language):</em> Comumente usado para configuração de software, é mais legível para humanos e suporta dados em forma de listas e dicionários.</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">nome</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">João Silva</span>
+<span class="nt">idade</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="nt">endereço</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">rua</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rua das Flores</span>
+<span class="w">  </span><span class="nt">cidade</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">São Paulo</span>
+<span class="w">  </span><span class="nt">CEP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">01002-000</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><em>Emails:</em> Os emails podem ser considerados semi-estruturados, pois possuem cabeçalhos padronizados (como De, Para, Assunto), mas o corpo da mensagem pode ser livre e não estruturado.</p></li>
+</ul>
+<p><strong>Dados não estruturados</strong></p>
+<p>Os dados não estruturados não possuem uma estrutura de dados predefinida, tornando-os mais difíceis de coletar, processar e analisar sem técnicas avançadas, como aprendizado de máquina. Eles compõem a maioria dos dados do mundo.
+A distinção entre dados semi-estruturados e não estruturados reside na existência de algum nível de organização e metadados que facilitam a interpretação dos dados. Enquanto os dados semi-estruturados mantêm uma certa ordem que facilita seu processamento, os dados não estruturados requerem métodos mais complexos para extrair informações úteis.</p>
+<p>Exemplos:</p>
+<ul class="simple">
+<li><p><em>Textos livres:</em> Artigos, publicações em blogs, comentários em mídias sociais e livros digitais. Esses dados são ricos em informações, mas não seguem uma estrutura organizada.</p></li>
+<li><p><em>Imagens e Vídeos:</em> Fotos digitais, filmagens de vídeo, e transmissões ao vivo. Embora possam conter metadados semi-estruturados (como data, hora e localização), o conteúdo visual em si é não estruturado.</p></li>
+<li><p><em>Áudios:</em> Gravações de voz, músicas e outros sons. Informações como faixas de áudio e metadados podem ser semi-estruturados, mas o conteúdo de áudio é não estruturado.</p></li>
+<li><p><em>Logs de sistemas:</em> Embora possam ter formatos repetitivos, o conteúdo detalhado dentro de logs de sistemas varia amplamente e pode ser considerado não estruturado devido à sua natureza variável e à falta de um esquema fixo.</p></li>
+</ul>
+</div>
+<div class="section" id="escalabilidade-em-bancos-de-dados">
+<h3>1.3.2 Escalabilidade em bancos de dados<a class="headerlink" href="#escalabilidade-em-bancos-de-dados" title="Permalink to this heading">#</a></h3>
+<p>A escalabilidade de um banco de dados refere-se à sua capacidade de lidar com o aumento de carga de trabalho ou demanda sem comprometer o desempenho, mantendo ou até melhorando a eficiência do processamento à medida que mais recursos são necessários. Isso pode envolver o processamento de quantidades crescentes de dados, o atendimento a um número maior de usuários simultâneos ou ambos.</p>
+<p>Existem dois tipos principais de escalabilidade:</p>
+<p><strong>Escalabilidade Vertical (Scale-up)</strong></p>
+<p>Refere-se ao processo de adicionar mais recursos a um único servidor ou nó para aumentar sua capacidade. Isso pode incluir a adição de CPUs mais rápidas, mais memória RAM, maior capacidade de armazenamento ou melhores dispositivos de E/S. A escalabilidade vertical é geralmente mais simples de implementar, pois não requer mudanças significativas na arquitetura do aplicativo ou do banco de dados. No entanto, ela tem um limite físico e financeiro; eventualmente, você atingirá o máximo que uma única máquina pode suportar ou se tornará proibitivamente caro adicionar mais recursos.</p>
+<p><strong>Escalabilidade Horizontal (Scale-out)</strong></p>
+<p>Refere-se ao processo de adicionar mais servidores ou nós ao sistema para distribuir a carga e os dados entre várias máquinas. Em contraste com a escalabilidade vertical, a horizontal permite que o sistema cresça quase indefinidamente, adicionando mais unidades conforme necessário. Isso é útil para sistemas distribuídos, como bancos de dados NoSQL (por exemplo, Cassandra, MongoDB) ou sistemas de banco de dados distribuídos SQL (como Google Spanner). A escalabilidade horizontal é mais complexa de gerenciar, pois requer sincronização entre os nós, balanceamento de carga e, em alguns casos, a reorganização dos dados para otimizar o desempenho e a disponibilidade.</p>
 </div>
 </div>
 <div class="section" id="bancos-de-dados-relacionais">
@@ -699,6 +897,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bancos-de-dados-distribuidos">Bancos de Dados Distribuídos</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bancos-de-dados-orientados-a-objetos">Bancos de Dados Orientados a Objetos</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bancos-de-dados-multimodelo">Bancos de Dados Multimodelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-dados-estruturados-semi-estruturados-e-nao-estruturados">1.3.1 Tipos de dados: estruturados, semi-estruturados e não estruturados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escalabilidade-em-bancos-de-dados">1.3.2 Escalabilidade em bancos de dados</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bancos-de-dados-relacionais">1.4 Bancos de dados relacionais</a><ul class="nav section-nav flex-column">

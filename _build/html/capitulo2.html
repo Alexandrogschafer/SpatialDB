@@ -675,7 +675,7 @@ document.write(`
 </div>
 <p>Este comando ativa o serviço do PostgreSQL, preparando o ambiente para a criação de bancos de dados e a execução de comandos SQL.</p>
 <p>Configuração do usuário</p>
-<p>Por questões de segurança, é aconselhável alterar a senha do usuário padrão <code class="docutils literal notranslate"><span class="pre">postgres</span></code>. Escolha uma senha forte e utilize o comando abaixo para atualizá-la:</p>
+<p>Você pode alterar a senha do usuário padrão <code class="docutils literal notranslate"><span class="pre">postgres</span></code>. Para as nossas atividades práticas, pode deixar a senha já definida (curso_geo). Caso deseja alterar a senha, utilize o comando abaixo:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !sudo -u postgres psql -c &quot;ALTER USER postgres PASSWORD &#39;curso_geo&#39;;&quot;</span>
@@ -683,7 +683,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Substitua <code class="docutils literal notranslate"><span class="pre">'curso_geo'</span></code> pela senha que desejar. Este passo é fundamental para proteger o seu banco de dados contra acessos não autorizados.</p>
+<p>Substitua <code class="docutils literal notranslate"><span class="pre">curso_geo</span></code> pela senha que desejar. Você pode manter essa senha, sem problemas. No entanto, caso altere a senha aqui, deve alterar o campo <code class="docutils literal notranslate"><span class="pre">password</span></code> no código de definição das credenciais a seguir.</p>
 <p>Após completar essas etapas, o PostgreSQL estará configurado e pronto para uso no Google Colab, permitindo que você prossiga com as atividades práticas de manipulação de bancos de dados SQL.</p>
 <p><strong>Etapa 2. Criação do Banco de Dados e conexão</strong></p>
 <p>Remova o banco de dados <code class="docutils literal notranslate"><span class="pre">bd_censo_ibge</span></code> se ele já existir e crie um novo para evitar conflitos.</p>
@@ -902,6 +902,12 @@ FROM information_schema.schemata;
     </tbody>
 </table></div></div>
 </div>
+<p>Esta consulta retorna o nome dos esquemas disponíveis no banco de dados atual. Os esquemas são espaços lógicos dentro do banco de dados, usados para organizar e segregar objetos de banco de dados, como tabelas, visões, funções, entre outros.</p>
+<p><em>Esquema public:</em> Este é o esquema padrão usado por todos os novos bancos de dados PostgreSQL. Quando você cria novas tabelas ou outros objetos sem especificar um esquema, esses objetos são automaticamente criados no esquema public. É o espaço de trabalho padrão para as atividades do banco de dados.</p>
+<p><em>Esquema information_schema:</em> Este esquema é um padrão ANSI que contém views de leitura que retornam informações sobre todos os objetos de banco de dados (como tabelas, colunas, privilégios e assim por diante). É um recurso útil para obter metadados sobre o banco de dados de maneira padronizada entre diferentes sistemas de gerenciamento de banco de dados (SGBDs).</p>
+<p><em>Esquema pg_catalog:</em> Este é o esquema interno do PostgreSQL que contém todas as tabelas e funções de sistema. Inclui definições de tabelas internas e views que contêm informações sobre o banco de dados, como tipos de dados, funções, e configurações do sistema. É essencial para o funcionamento interno do PostgreSQL.</p>
+<p><em>Esquema pg_toast:</em> Este esquema é usado internamente pelo PostgreSQL para armazenar dados de grandes objetos de forma eficiente. TOAST significa “The Oversized-Attribute Storage Technique”. Quando uma linha em uma tabela possui colunas com dados que excedem um certo limite de tamanho, esses dados são comprimidos e armazenados em tabelas secundárias no esquema pg_toast, permitindo que a tabela principal seja acessada mais rapidamente.</p>
+<p>Cada um desses esquemas serve a propósitos diferentes, variando do armazenamento de objetos e dados do usuário (public), ao armazenamento de metadados do banco de dados (information_schema, pg_catalog) e ao armazenamento eficiente de dados grandes (pg_toast).</p>
 <ul class="simple">
 <li><p>Listar tabelas no esquema ‘public’</p></li>
 </ul>
@@ -1036,31 +1042,7 @@ FROM pg_stat_activity;
         <tr>
             <td>None</td>
             <td>None</td>
-            <td>1508</td>
-            <td>None</td>
-            <td>None</td>
-            <td>None</td>
-            <td></td>
-            <td>None</td>
-            <td>None</td>
-            <td>None</td>
-            <td>2024-03-20 09:12:20.652604-03:00</td>
-            <td>None</td>
-            <td>None</td>
-            <td>None</td>
-            <td>Activity</td>
-            <td>AutoVacuumMain</td>
-            <td>None</td>
-            <td>None</td>
-            <td>None</td>
-            <td>None</td>
-            <td></td>
-            <td>autovacuum launcher</td>
-        </tr>
-        <tr>
-            <td>None</td>
-            <td>None</td>
-            <td>1509</td>
+            <td>1529</td>
             <td>None</td>
             <td>10</td>
             <td>postgres</td>
@@ -1068,7 +1050,7 @@ FROM pg_stat_activity;
             <td>None</td>
             <td>None</td>
             <td>None</td>
-            <td>2024-03-20 09:12:20.653353-03:00</td>
+            <td>2024-03-27 07:56:52.991109-03:00</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1082,20 +1064,44 @@ FROM pg_stat_activity;
             <td>logical replication launcher</td>
         </tr>
         <tr>
-            <td>18197</td>
+            <td>None</td>
+            <td>None</td>
+            <td>1528</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td></td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>2024-03-27 07:56:52.991331-03:00</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>Activity</td>
+            <td>AutoVacuumMain</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td>None</td>
+            <td></td>
+            <td>autovacuum launcher</td>
+        </tr>
+        <tr>
+            <td>18362</td>
             <td>bd_censo_ibge</td>
-            <td>30993</td>
+            <td>13768</td>
             <td>None</td>
             <td>10</td>
             <td>postgres</td>
             <td></td>
             <td>127.0.0.1</td>
             <td>None</td>
-            <td>58466</td>
-            <td>2024-03-20 20:50:42.504433-03:00</td>
+            <td>39518</td>
+            <td>2024-03-27 09:36:23.696893-03:00</td>
             <td>None</td>
             <td>None</td>
-            <td>2024-03-20 20:50:42.521350-03:00</td>
+            <td>2024-03-27 09:36:23.716314-03:00</td>
             <td>Client</td>
             <td>ClientRead</td>
             <td>idle</td>
@@ -1106,25 +1112,25 @@ FROM pg_stat_activity;
             <td>client backend</td>
         </tr>
         <tr>
-            <td>18197</td>
+            <td>18362</td>
             <td>bd_censo_ibge</td>
-            <td>30998</td>
+            <td>13773</td>
             <td>None</td>
             <td>10</td>
             <td>postgres</td>
             <td></td>
             <td>127.0.0.1</td>
             <td>None</td>
-            <td>58478</td>
-            <td>2024-03-20 20:50:42.950004-03:00</td>
-            <td>2024-03-20 20:50:43.039890-03:00</td>
-            <td>2024-03-20 20:50:43.039996-03:00</td>
-            <td>2024-03-20 20:50:43.039997-03:00</td>
+            <td>39522</td>
+            <td>2024-03-27 09:36:24.612957-03:00</td>
+            <td>2024-03-27 09:36:24.699991-03:00</td>
+            <td>2024-03-27 09:36:24.700108-03:00</td>
+            <td>2024-03-27 09:36:24.700108-03:00</td>
             <td>None</td>
             <td>None</td>
             <td>active</td>
             <td>None</td>
-            <td>1429</td>
+            <td>1493</td>
             <td>None</td>
             <td>SELECT * <br>FROM pg_stat_activity;</td>
             <td>client backend</td>
@@ -1132,7 +1138,7 @@ FROM pg_stat_activity;
         <tr>
             <td>None</td>
             <td>None</td>
-            <td>1503</td>
+            <td>1513</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1140,12 +1146,12 @@ FROM pg_stat_activity;
             <td>None</td>
             <td>None</td>
             <td>None</td>
-            <td>2024-03-20 09:12:20.606062-03:00</td>
+            <td>2024-03-27 07:56:52.911150-03:00</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
             <td>Activity</td>
-            <td>BgWriterHibernate</td>
+            <td>BgWriterMain</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1156,7 +1162,7 @@ FROM pg_stat_activity;
         <tr>
             <td>None</td>
             <td>None</td>
-            <td>1502</td>
+            <td>1512</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1164,7 +1170,7 @@ FROM pg_stat_activity;
             <td>None</td>
             <td>None</td>
             <td>None</td>
-            <td>2024-03-20 09:12:20.605385-03:00</td>
+            <td>2024-03-27 07:56:52.910606-03:00</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1180,7 +1186,7 @@ FROM pg_stat_activity;
         <tr>
             <td>None</td>
             <td>None</td>
-            <td>1507</td>
+            <td>1527</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1188,7 +1194,7 @@ FROM pg_stat_activity;
             <td>None</td>
             <td>None</td>
             <td>None</td>
-            <td>2024-03-20 09:12:20.651953-03:00</td>
+            <td>2024-03-27 07:56:52.990532-03:00</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
@@ -1483,7 +1489,9 @@ CREATE TABLE &quot;regiao&quot; (
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
 Done.
-Done.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
@@ -1512,9 +1520,7 @@ WHERE table_schema = &#39;public&#39;;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 rows affected.
+5 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -1729,7 +1735,9 @@ ALTER TABLE &quot;estado&quot; ADD FOREIGN KEY (&quot;cod_rg&quot;) REFERENCES &
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
-Done.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
 Done.
 </pre></div>
 </div>
@@ -1819,7 +1827,9 @@ CREATE TABLE &quot;censo_mun&quot; (
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-Done.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
@@ -1839,11 +1849,11 @@ ALTER TABLE &quot;censo_mun&quot; ADD FOREIGN KEY (&quot;cod_uf&quot;) REFERENCE
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-Done.
-Done.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
+Done.
+Done.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
@@ -1914,7 +1924,9 @@ SELECT * FROM regiao;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-5 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -1985,7 +1997,9 @@ INSERT INTO estado (cod_uf, nome_uf, sigla_uf, cod_rg) VALUES
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-27 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
@@ -2003,7 +2017,9 @@ SELECT * FROM estado;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-27 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -2221,9 +2237,7 @@ SELECT * FROM estado;
 2       1201       Rio Branco      12
 3       1202  Cruzeiro do Sul      12
 4       1301           Manaus      13
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   cod_rgi     nome_rgi  cod_rgint
+   cod_rgi     nome_rgi  cod_rgint
 0   110001  Porto Velho       1101
 1   110002    Ariquemes       1101
 2   110003         Jaru       1101
@@ -3333,7 +3347,9 @@ FROM estado;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-27 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -3472,9 +3488,7 @@ FROM estado;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 rows affected.
+5 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -3596,7 +3610,9 @@ FROM censo_mun;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-1 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -4058,7 +4074,9 @@ WHERE cod_rg = 2;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-9 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -4813,7 +4831,9 @@ GROUP BY nome_uf;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-27 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -4949,9 +4969,7 @@ ORDER BY nome_uf ASC;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
+27 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5086,9 +5104,7 @@ ORDER BY total_populacao_2022 DESC;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
+27 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5225,7 +5241,9 @@ LIMIT 6;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-6 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5277,7 +5295,9 @@ LIMIT 6;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-6 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5356,7 +5376,9 @@ ORDER BY count DESC;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-27 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5492,7 +5514,9 @@ ORDER BY count DESC;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-27 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5689,9 +5713,7 @@ HAVING SUM(popul_2022) &lt; 1000000;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 rows affected.
+3 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5727,9 +5749,7 @@ HAVING MAX(popul_2022) &gt; 2000000;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7 rows affected.
+7 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5775,9 +5795,7 @@ WHERE popul_2022 &gt; 2000000;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7 rows affected.
+7 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5861,9 +5879,7 @@ LIMIT 15;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15 rows affected.
+15 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -5978,9 +5994,7 @@ FROM censo_mun_uf;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 rows affected.
+1 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -6014,9 +6028,7 @@ ORDER BY sigla_uf;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 rows affected.
+27 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -6234,7 +6246,9 @@ CREATE TABLE usuarios (
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-Done.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
@@ -6327,7 +6341,9 @@ INNER JOIN
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-3 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -6423,7 +6439,9 @@ INSERT INTO usuarios (UsuarioID, Nome) VALUES (4, &#39;Pedro&#39;);
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-1 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 rows affected.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
@@ -6607,9 +6625,7 @@ RIGHT JOIN
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 rows affected.
+4 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -7012,7 +7028,9 @@ INNER JOIN
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-Done.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
@@ -7295,9 +7313,7 @@ LIMIT 15;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15 rows affected.
+15 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -7508,7 +7524,9 @@ LIMIT 20;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> * postgresql://postgres:***@localhost/bd_censo_ibge
-20 rows affected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20 rows affected.
 </pre></div>
 </div>
 <div class="output text_html"><table>
@@ -7829,6 +7847,9 @@ CREATE INDEX vm_censo_mun_cd_geocodi_idx ON vm_censo_mun (cd_geocodi);
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Done.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
