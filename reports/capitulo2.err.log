@@ -1,0 +1,279 @@
+Traceback (most recent call last):
+  File "/home/alexandro/anaconda3/envs/geoenv/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/alexandro/anaconda3/envs/geoenv/lib/python3.8/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/alexandro/anaconda3/envs/geoenv/lib/python3.8/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/alexandro/anaconda3/envs/geoenv/lib/python3.8/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/alexandro/anaconda3/envs/geoenv/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/alexandro/anaconda3/envs/geoenv/lib/python3.8/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/alexandro/anaconda3/envs/geoenv/lib/python3.8/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/alexandro/anaconda3/envs/geoenv/lib/python3.8/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from sqlalchemy import create_engine
+
+dbname = 'bd_censo_ibge'  # Nome do banco de dados
+user = 'postgres'         # Nome do usuário
+password = 'curso_geo'    # Senha definida anteriormente
+host = 'localhost'        # Endereço do host
+
+
+# Criando o motor de conexão com o banco de dados
+engine = create_engine(f'postgresql://{user}:{password}@{host}/{dbname}')
+
+# Inserindo os dados na tabela regiao_inter
+df_regiao_inter.to_sql('regiao_inter', con=engine, if_exists='append', index=False)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mUniqueViolation[0m                           Traceback (most recent call last)
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/sqlalchemy/engine/base.py:2119[0m, in [0;36mConnection._exec_insertmany_context[0;34m(self, dialect, context)[0m
+[1;32m   2118[0m     [38;5;28;01melse[39;00m:
+[0;32m-> 2119[0m         [43mdialect[49m[38;5;241;43m.[39;49m[43mdo_execute[49m[43m([49m
+[1;32m   2120[0m [43m            [49m[43mcursor[49m[43m,[49m
+[1;32m   2121[0m [43m            [49m[43msub_stmt[49m[43m,[49m
+[1;32m   2122[0m [43m            [49m[43msub_params[49m[43m,[49m
+[1;32m   2123[0m [43m            [49m[43mcontext[49m[43m,[49m
+[1;32m   2124[0m [43m        [49m[43m)[49m
+[1;32m   2126[0m [38;5;28;01mexcept[39;00m [38;5;167;01mBaseException[39;00m [38;5;28;01mas[39;00m e:
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/sqlalchemy/engine/default.py:924[0m, in [0;36mDefaultDialect.do_execute[0;34m(self, cursor, statement, parameters, context)[0m
+[1;32m    923[0m [38;5;28;01mdef[39;00m [38;5;21mdo_execute[39m([38;5;28mself[39m, cursor, statement, parameters, context[38;5;241m=[39m[38;5;28;01mNone[39;00m):
+[0;32m--> 924[0m     [43mcursor[49m[38;5;241;43m.[39;49m[43mexecute[49m[43m([49m[43mstatement[49m[43m,[49m[43m [49m[43mparameters[49m[43m)[49m
+
+[0;31mUniqueViolation[0m: duplicate key value violates unique constraint "regiao_inter_pkey"
+DETAIL:  Key (cod_rgint)=(1101) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+[0;31mIntegrityError[0m                            Traceback (most recent call last)
+Cell [0;32mIn[41], line 13[0m
+[1;32m     10[0m engine [38;5;241m=[39m create_engine([38;5;124mf[39m[38;5;124m'[39m[38;5;124mpostgresql://[39m[38;5;132;01m{[39;00muser[38;5;132;01m}[39;00m[38;5;124m:[39m[38;5;132;01m{[39;00mpassword[38;5;132;01m}[39;00m[38;5;124m@[39m[38;5;132;01m{[39;00mhost[38;5;132;01m}[39;00m[38;5;124m/[39m[38;5;132;01m{[39;00mdbname[38;5;132;01m}[39;00m[38;5;124m'[39m)
+[1;32m     12[0m [38;5;66;03m# Inserindo os dados na tabela regiao_inter[39;00m
+[0;32m---> 13[0m [43mdf_regiao_inter[49m[38;5;241;43m.[39;49m[43mto_sql[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mregiao_inter[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mcon[49m[38;5;241;43m=[39;49m[43mengine[49m[43m,[49m[43m [49m[43mif_exists[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mappend[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mindex[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m)[49m
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/pandas/core/generic.py:2878[0m, in [0;36mNDFrame.to_sql[0;34m(self, name, con, schema, if_exists, index, index_label, chunksize, dtype, method)[0m
+[1;32m   2713[0m [38;5;250m[39m[38;5;124;03m"""[39;00m
+[1;32m   2714[0m [38;5;124;03mWrite records stored in a DataFrame to a SQL database.[39;00m
+[1;32m   2715[0m 
+[0;32m   (...)[0m
+[1;32m   2874[0m [38;5;124;03m[(1,), (None,), (2,)][39;00m
+[1;32m   2875[0m [38;5;124;03m"""[39;00m  [38;5;66;03m# noqa:E501[39;00m
+[1;32m   2876[0m [38;5;28;01mfrom[39;00m [38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mio[39;00m [38;5;28;01mimport[39;00m sql
+[0;32m-> 2878[0m [38;5;28;01mreturn[39;00m [43msql[49m[38;5;241;43m.[39;49m[43mto_sql[49m[43m([49m
+[1;32m   2879[0m [43m    [49m[38;5;28;43mself[39;49m[43m,[49m
+[1;32m   2880[0m [43m    [49m[43mname[49m[43m,[49m
+[1;32m   2881[0m [43m    [49m[43mcon[49m[43m,[49m
+[1;32m   2882[0m [43m    [49m[43mschema[49m[38;5;241;43m=[39;49m[43mschema[49m[43m,[49m
+[1;32m   2883[0m [43m    [49m[43mif_exists[49m[38;5;241;43m=[39;49m[43mif_exists[49m[43m,[49m
+[1;32m   2884[0m [43m    [49m[43mindex[49m[38;5;241;43m=[39;49m[43mindex[49m[43m,[49m
+[1;32m   2885[0m [43m    [49m[43mindex_label[49m[38;5;241;43m=[39;49m[43mindex_label[49m[43m,[49m
+[1;32m   2886[0m [43m    [49m[43mchunksize[49m[38;5;241;43m=[39;49m[43mchunksize[49m[43m,[49m
+[1;32m   2887[0m [43m    [49m[43mdtype[49m[38;5;241;43m=[39;49m[43mdtype[49m[43m,[49m
+[1;32m   2888[0m [43m    [49m[43mmethod[49m[38;5;241;43m=[39;49m[43mmethod[49m[43m,[49m
+[1;32m   2889[0m [43m[49m[43m)[49m
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/pandas/io/sql.py:769[0m, in [0;36mto_sql[0;34m(frame, name, con, schema, if_exists, index, index_label, chunksize, dtype, method, engine, **engine_kwargs)[0m
+[1;32m    764[0m     [38;5;28;01mraise[39;00m [38;5;167;01mNotImplementedError[39;00m(
+[1;32m    765[0m         [38;5;124m"[39m[38;5;124m'[39m[38;5;124mframe[39m[38;5;124m'[39m[38;5;124m argument should be either a Series or a DataFrame[39m[38;5;124m"[39m
+[1;32m    766[0m     )
+[1;32m    768[0m [38;5;28;01mwith[39;00m pandasSQL_builder(con, schema[38;5;241m=[39mschema, need_transaction[38;5;241m=[39m[38;5;28;01mTrue[39;00m) [38;5;28;01mas[39;00m pandas_sql:
+[0;32m--> 769[0m     [38;5;28;01mreturn[39;00m [43mpandas_sql[49m[38;5;241;43m.[39;49m[43mto_sql[49m[43m([49m
+[1;32m    770[0m [43m        [49m[43mframe[49m[43m,[49m
+[1;32m    771[0m [43m        [49m[43mname[49m[43m,[49m
+[1;32m    772[0m [43m        [49m[43mif_exists[49m[38;5;241;43m=[39;49m[43mif_exists[49m[43m,[49m
+[1;32m    773[0m [43m        [49m[43mindex[49m[38;5;241;43m=[39;49m[43mindex[49m[43m,[49m
+[1;32m    774[0m [43m        [49m[43mindex_label[49m[38;5;241;43m=[39;49m[43mindex_label[49m[43m,[49m
+[1;32m    775[0m [43m        [49m[43mschema[49m[38;5;241;43m=[39;49m[43mschema[49m[43m,[49m
+[1;32m    776[0m [43m        [49m[43mchunksize[49m[38;5;241;43m=[39;49m[43mchunksize[49m[43m,[49m
+[1;32m    777[0m [43m        [49m[43mdtype[49m[38;5;241;43m=[39;49m[43mdtype[49m[43m,[49m
+[1;32m    778[0m [43m        [49m[43mmethod[49m[38;5;241;43m=[39;49m[43mmethod[49m[43m,[49m
+[1;32m    779[0m [43m        [49m[43mengine[49m[38;5;241;43m=[39;49m[43mengine[49m[43m,[49m
+[1;32m    780[0m [43m        [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mengine_kwargs[49m[43m,[49m
+[1;32m    781[0m [43m    [49m[43m)[49m
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/pandas/io/sql.py:1920[0m, in [0;36mSQLDatabase.to_sql[0;34m(self, frame, name, if_exists, index, index_label, schema, chunksize, dtype, method, engine, **engine_kwargs)[0m
+[1;32m   1908[0m sql_engine [38;5;241m=[39m get_engine(engine)
+[1;32m   1910[0m table [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mprep_table(
+[1;32m   1911[0m     frame[38;5;241m=[39mframe,
+[1;32m   1912[0m     name[38;5;241m=[39mname,
+[0;32m   (...)[0m
+[1;32m   1917[0m     dtype[38;5;241m=[39mdtype,
+[1;32m   1918[0m )
+[0;32m-> 1920[0m total_inserted [38;5;241m=[39m [43msql_engine[49m[38;5;241;43m.[39;49m[43minsert_records[49m[43m([49m
+[1;32m   1921[0m [43m    [49m[43mtable[49m[38;5;241;43m=[39;49m[43mtable[49m[43m,[49m
+[1;32m   1922[0m [43m    [49m[43mcon[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mcon[49m[43m,[49m
+[1;32m   1923[0m [43m    [49m[43mframe[49m[38;5;241;43m=[39;49m[43mframe[49m[43m,[49m
+[1;32m   1924[0m [43m    [49m[43mname[49m[38;5;241;43m=[39;49m[43mname[49m[43m,[49m
+[1;32m   1925[0m [43m    [49m[43mindex[49m[38;5;241;43m=[39;49m[43mindex[49m[43m,[49m
+[1;32m   1926[0m [43m    [49m[43mschema[49m[38;5;241;43m=[39;49m[43mschema[49m[43m,[49m
+[1;32m   1927[0m [43m    [49m[43mchunksize[49m[38;5;241;43m=[39;49m[43mchunksize[49m[43m,[49m
+[1;32m   1928[0m [43m    [49m[43mmethod[49m[38;5;241;43m=[39;49m[43mmethod[49m[43m,[49m
+[1;32m   1929[0m [43m    [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mengine_kwargs[49m[43m,[49m
+[1;32m   1930[0m [43m[49m[43m)[49m
+[1;32m   1932[0m [38;5;28mself[39m[38;5;241m.[39mcheck_case_sensitive(name[38;5;241m=[39mname, schema[38;5;241m=[39mschema)
+[1;32m   1933[0m [38;5;28;01mreturn[39;00m total_inserted
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/pandas/io/sql.py:1470[0m, in [0;36mSQLAlchemyEngine.insert_records[0;34m(self, table, con, frame, name, index, schema, chunksize, method, **engine_kwargs)[0m
+[1;32m   1468[0m [38;5;28;01mif[39;00m re[38;5;241m.[39msearch(msg, err_text):
+[1;32m   1469[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([38;5;124m"[39m[38;5;124minf cannot be used with MySQL[39m[38;5;124m"[39m) [38;5;28;01mfrom[39;00m [38;5;21;01merr[39;00m
+[0;32m-> 1470[0m [38;5;28;01mraise[39;00m err
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/pandas/io/sql.py:1461[0m, in [0;36mSQLAlchemyEngine.insert_records[0;34m(self, table, con, frame, name, index, schema, chunksize, method, **engine_kwargs)[0m
+[1;32m   1458[0m [38;5;28;01mfrom[39;00m [38;5;21;01msqlalchemy[39;00m [38;5;28;01mimport[39;00m exc
+[1;32m   1460[0m [38;5;28;01mtry[39;00m:
+[0;32m-> 1461[0m     [38;5;28;01mreturn[39;00m [43mtable[49m[38;5;241;43m.[39;49m[43minsert[49m[43m([49m[43mchunksize[49m[38;5;241;43m=[39;49m[43mchunksize[49m[43m,[49m[43m [49m[43mmethod[49m[38;5;241;43m=[39;49m[43mmethod[49m[43m)[49m
+[1;32m   1462[0m [38;5;28;01mexcept[39;00m exc[38;5;241m.[39mStatementError [38;5;28;01mas[39;00m err:
+[1;32m   1463[0m     [38;5;66;03m# GH34431[39;00m
+[1;32m   1464[0m     [38;5;66;03m# https://stackoverflow.com/a/67358288/6067848[39;00m
+[1;32m   1465[0m     msg [38;5;241m=[39m [38;5;124mr[39m[38;5;124m"""[39m[38;5;124m([39m[38;5;124m\[39m[38;5;124m(1054, [39m[38;5;124m"[39m[38;5;124mUnknown column [39m[38;5;124m'[39m[38;5;124minf(e0)?[39m[38;5;124m'[39m[38;5;124m in [39m[38;5;124m'[39m[38;5;124mfield list[39m[38;5;124m'[39m[38;5;124m"[39m[38;5;124m\[39m[38;5;124m))(?#[39m
+[1;32m   1466[0m [38;5;124m    )|inf can not be used with MySQL[39m[38;5;124m"""[39m
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/pandas/io/sql.py:1023[0m, in [0;36mSQLTable.insert[0;34m(self, chunksize, method)[0m
+[1;32m   1020[0m     [38;5;28;01mbreak[39;00m
+[1;32m   1022[0m chunk_iter [38;5;241m=[39m [38;5;28mzip[39m([38;5;241m*[39m(arr[start_i:end_i] [38;5;28;01mfor[39;00m arr [38;5;129;01min[39;00m data_list))
+[0;32m-> 1023[0m num_inserted [38;5;241m=[39m [43mexec_insert[49m[43m([49m[43mconn[49m[43m,[49m[43m [49m[43mkeys[49m[43m,[49m[43m [49m[43mchunk_iter[49m[43m)[49m
+[1;32m   1024[0m [38;5;66;03m# GH 46891[39;00m
+[1;32m   1025[0m [38;5;28;01mif[39;00m is_integer(num_inserted):
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/pandas/io/sql.py:929[0m, in [0;36mSQLTable._execute_insert[0;34m(self, conn, keys, data_iter)[0m
+[1;32m    917[0m [38;5;250m[39m[38;5;124;03m"""[39;00m
+[1;32m    918[0m [38;5;124;03mExecute SQL statement inserting data[39;00m
+[1;32m    919[0m 
+[0;32m   (...)[0m
+[1;32m    926[0m [38;5;124;03m   Each item contains a list of values to be inserted[39;00m
+[1;32m    927[0m [38;5;124;03m"""[39;00m
+[1;32m    928[0m data [38;5;241m=[39m [[38;5;28mdict[39m([38;5;28mzip[39m(keys, row)) [38;5;28;01mfor[39;00m row [38;5;129;01min[39;00m data_iter]
+[0;32m--> 929[0m result [38;5;241m=[39m [43mconn[49m[38;5;241;43m.[39;49m[43mexecute[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mtable[49m[38;5;241;43m.[39;49m[43minsert[49m[43m([49m[43m)[49m[43m,[49m[43m [49m[43mdata[49m[43m)[49m
+[1;32m    930[0m [38;5;28;01mreturn[39;00m result[38;5;241m.[39mrowcount
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/sqlalchemy/engine/base.py:1421[0m, in [0;36mConnection.execute[0;34m(self, statement, parameters, execution_options)[0m
+[1;32m   1419[0m     [38;5;28;01mraise[39;00m exc[38;5;241m.[39mObjectNotExecutableError(statement) [38;5;28;01mfrom[39;00m [38;5;21;01merr[39;00m
+[1;32m   1420[0m [38;5;28;01melse[39;00m:
+[0;32m-> 1421[0m     [38;5;28;01mreturn[39;00m [43mmeth[49m[43m([49m
+[1;32m   1422[0m [43m        [49m[38;5;28;43mself[39;49m[43m,[49m
+[1;32m   1423[0m [43m        [49m[43mdistilled_parameters[49m[43m,[49m
+[1;32m   1424[0m [43m        [49m[43mexecution_options[49m[43m [49m[38;5;129;43;01mor[39;49;00m[43m [49m[43mNO_OPTIONS[49m[43m,[49m
+[1;32m   1425[0m [43m    [49m[43m)[49m
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/sqlalchemy/sql/elements.py:514[0m, in [0;36mClauseElement._execute_on_connection[0;34m(self, connection, distilled_params, execution_options)[0m
+[1;32m    512[0m     [38;5;28;01mif[39;00m TYPE_CHECKING:
+[1;32m    513[0m         [38;5;28;01massert[39;00m [38;5;28misinstance[39m([38;5;28mself[39m, Executable)
+[0;32m--> 514[0m     [38;5;28;01mreturn[39;00m [43mconnection[49m[38;5;241;43m.[39;49m[43m_execute_clauseelement[49m[43m([49m
+[1;32m    515[0m [43m        [49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43mdistilled_params[49m[43m,[49m[43m [49m[43mexecution_options[49m
+[1;32m    516[0m [43m    [49m[43m)[49m
+[1;32m    517[0m [38;5;28;01melse[39;00m:
+[1;32m    518[0m     [38;5;28;01mraise[39;00m exc[38;5;241m.[39mObjectNotExecutableError([38;5;28mself[39m)
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/sqlalchemy/engine/base.py:1643[0m, in [0;36mConnection._execute_clauseelement[0;34m(self, elem, distilled_parameters, execution_options)[0m
+[1;32m   1631[0m compiled_cache: Optional[CompiledCacheType] [38;5;241m=[39m execution_options[38;5;241m.[39mget(
+[1;32m   1632[0m     [38;5;124m"[39m[38;5;124mcompiled_cache[39m[38;5;124m"[39m, [38;5;28mself[39m[38;5;241m.[39mengine[38;5;241m.[39m_compiled_cache
+[1;32m   1633[0m )
+[1;32m   1635[0m compiled_sql, extracted_params, cache_hit [38;5;241m=[39m elem[38;5;241m.[39m_compile_w_cache(
+[1;32m   1636[0m     dialect[38;5;241m=[39mdialect,
+[1;32m   1637[0m     compiled_cache[38;5;241m=[39mcompiled_cache,
+[0;32m   (...)[0m
+[1;32m   1641[0m     linting[38;5;241m=[39m[38;5;28mself[39m[38;5;241m.[39mdialect[38;5;241m.[39mcompiler_linting [38;5;241m|[39m compiler[38;5;241m.[39mWARN_LINTING,
+[1;32m   1642[0m )
+[0;32m-> 1643[0m ret [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_execute_context[49m[43m([49m
+[1;32m   1644[0m [43m    [49m[43mdialect[49m[43m,[49m
+[1;32m   1645[0m [43m    [49m[43mdialect[49m[38;5;241;43m.[39;49m[43mexecution_ctx_cls[49m[38;5;241;43m.[39;49m[43m_init_compiled[49m[43m,[49m
+[1;32m   1646[0m [43m    [49m[43mcompiled_sql[49m[43m,[49m
+[1;32m   1647[0m [43m    [49m[43mdistilled_parameters[49m[43m,[49m
+[1;32m   1648[0m [43m    [49m[43mexecution_options[49m[43m,[49m
+[1;32m   1649[0m [43m    [49m[43mcompiled_sql[49m[43m,[49m
+[1;32m   1650[0m [43m    [49m[43mdistilled_parameters[49m[43m,[49m
+[1;32m   1651[0m [43m    [49m[43melem[49m[43m,[49m
+[1;32m   1652[0m [43m    [49m[43mextracted_params[49m[43m,[49m
+[1;32m   1653[0m [43m    [49m[43mcache_hit[49m[38;5;241;43m=[39;49m[43mcache_hit[49m[43m,[49m
+[1;32m   1654[0m [43m[49m[43m)[49m
+[1;32m   1655[0m [38;5;28;01mif[39;00m has_events:
+[1;32m   1656[0m     [38;5;28mself[39m[38;5;241m.[39mdispatch[38;5;241m.[39mafter_execute(
+[1;32m   1657[0m         [38;5;28mself[39m,
+[1;32m   1658[0m         elem,
+[0;32m   (...)[0m
+[1;32m   1662[0m         ret,
+[1;32m   1663[0m     )
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/sqlalchemy/engine/base.py:1847[0m, in [0;36mConnection._execute_context[0;34m(self, dialect, constructor, statement, parameters, execution_options, *args, **kw)[0m
+[1;32m   1844[0m context[38;5;241m.[39mpre_exec()
+[1;32m   1846[0m [38;5;28;01mif[39;00m context[38;5;241m.[39mexecute_style [38;5;129;01mis[39;00m ExecuteStyle[38;5;241m.[39mINSERTMANYVALUES:
+[0;32m-> 1847[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_exec_insertmany_context[49m[43m([49m[43mdialect[49m[43m,[49m[43m [49m[43mcontext[49m[43m)[49m
+[1;32m   1848[0m [38;5;28;01melse[39;00m:
+[1;32m   1849[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_exec_single_context(
+[1;32m   1850[0m         dialect, context, statement, parameters
+[1;32m   1851[0m     )
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/sqlalchemy/engine/base.py:2127[0m, in [0;36mConnection._exec_insertmany_context[0;34m(self, dialect, context)[0m
+[1;32m   2119[0m         dialect[38;5;241m.[39mdo_execute(
+[1;32m   2120[0m             cursor,
+[1;32m   2121[0m             sub_stmt,
+[1;32m   2122[0m             sub_params,
+[1;32m   2123[0m             context,
+[1;32m   2124[0m         )
+[1;32m   2126[0m [38;5;28;01mexcept[39;00m [38;5;167;01mBaseException[39;00m [38;5;28;01mas[39;00m e:
+[0;32m-> 2127[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_handle_dbapi_exception[49m[43m([49m
+[1;32m   2128[0m [43m        [49m[43me[49m[43m,[49m
+[1;32m   2129[0m [43m        [49m[43msql_util[49m[38;5;241;43m.[39;49m[43m_long_statement[49m[43m([49m[43msub_stmt[49m[43m)[49m[43m,[49m
+[1;32m   2130[0m [43m        [49m[43msub_params[49m[43m,[49m
+[1;32m   2131[0m [43m        [49m[43mcursor[49m[43m,[49m
+[1;32m   2132[0m [43m        [49m[43mcontext[49m[43m,[49m
+[1;32m   2133[0m [43m        [49m[43mis_sub_exec[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m
+[1;32m   2134[0m [43m    [49m[43m)[49m
+[1;32m   2136[0m [38;5;28;01mif[39;00m engine_events:
+[1;32m   2137[0m     [38;5;28mself[39m[38;5;241m.[39mdispatch[38;5;241m.[39mafter_cursor_execute(
+[1;32m   2138[0m         [38;5;28mself[39m,
+[1;32m   2139[0m         cursor,
+[0;32m   (...)[0m
+[1;32m   2143[0m         context[38;5;241m.[39mexecutemany,
+[1;32m   2144[0m     )
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/sqlalchemy/engine/base.py:2356[0m, in [0;36mConnection._handle_dbapi_exception[0;34m(self, e, statement, parameters, cursor, context, is_sub_exec)[0m
+[1;32m   2354[0m [38;5;28;01melif[39;00m should_wrap:
+[1;32m   2355[0m     [38;5;28;01massert[39;00m sqlalchemy_exception [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m
+[0;32m-> 2356[0m     [38;5;28;01mraise[39;00m sqlalchemy_exception[38;5;241m.[39mwith_traceback(exc_info[[38;5;241m2[39m]) [38;5;28;01mfrom[39;00m [38;5;21;01me[39;00m
+[1;32m   2357[0m [38;5;28;01melse[39;00m:
+[1;32m   2358[0m     [38;5;28;01massert[39;00m exc_info[[38;5;241m1[39m] [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/sqlalchemy/engine/base.py:2119[0m, in [0;36mConnection._exec_insertmany_context[0;34m(self, dialect, context)[0m
+[1;32m   2117[0m             [38;5;28;01mbreak[39;00m
+[1;32m   2118[0m     [38;5;28;01melse[39;00m:
+[0;32m-> 2119[0m         [43mdialect[49m[38;5;241;43m.[39;49m[43mdo_execute[49m[43m([49m
+[1;32m   2120[0m [43m            [49m[43mcursor[49m[43m,[49m
+[1;32m   2121[0m [43m            [49m[43msub_stmt[49m[43m,[49m
+[1;32m   2122[0m [43m            [49m[43msub_params[49m[43m,[49m
+[1;32m   2123[0m [43m            [49m[43mcontext[49m[43m,[49m
+[1;32m   2124[0m [43m        [49m[43m)[49m
+[1;32m   2126[0m [38;5;28;01mexcept[39;00m [38;5;167;01mBaseException[39;00m [38;5;28;01mas[39;00m e:
+[1;32m   2127[0m     [38;5;28mself[39m[38;5;241m.[39m_handle_dbapi_exception(
+[1;32m   2128[0m         e,
+[1;32m   2129[0m         sql_util[38;5;241m.[39m_long_statement(sub_stmt),
+[0;32m   (...)[0m
+[1;32m   2133[0m         is_sub_exec[38;5;241m=[39m[38;5;28;01mTrue[39;00m,
+[1;32m   2134[0m     )
+
+File [0;32m~/anaconda3/envs/geoenv/lib/python3.8/site-packages/sqlalchemy/engine/default.py:924[0m, in [0;36mDefaultDialect.do_execute[0;34m(self, cursor, statement, parameters, context)[0m
+[1;32m    923[0m [38;5;28;01mdef[39;00m [38;5;21mdo_execute[39m([38;5;28mself[39m, cursor, statement, parameters, context[38;5;241m=[39m[38;5;28;01mNone[39;00m):
+[0;32m--> 924[0m     [43mcursor[49m[38;5;241;43m.[39;49m[43mexecute[49m[43m([49m[43mstatement[49m[43m,[49m[43m [49m[43mparameters[49m[43m)[49m
+
+[0;31mIntegrityError[0m: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "regiao_inter_pkey"
+DETAIL:  Key (cod_rgint)=(1101) already exists.
+
+[SQL: INSERT INTO regiao_inter (cod_rgint, nome_rgint, cod_uf) VALUES (%(cod_rgint__0)s, %(nome_rgint__0)s, %(cod_uf__0)s), (%(cod_rgint__1)s, %(nome_rgint__1)s, %(cod_uf__1)s), (%(cod_rgint__2)s, %(nome_rgint__2)s, %(cod_uf__2)s), (%(cod_rgint__3)s, %(nom ... 7362 characters truncated ... s, %(nome_rgint__131)s, %(cod_uf__131)s), (%(cod_rgint__132)s, %(nome_rgint__132)s, %(cod_uf__132)s)]
+[parameters: {'cod_rgint__0': 1101, 'nome_rgint__0': 'Porto Velho', 'cod_uf__0': 11, 'cod_rgint__1': 1102, 'nome_rgint__1': 'Ji-Paraná', 'cod_uf__1': 11, 'cod_rgint__2': 1201, 'nome_rgint__2': 'Rio Branco', 'cod_uf__2': 12, 'cod_rgint__3': 1202, 'nome_rgint__3': 'Cruzeiro do Sul', 'cod_uf__3': 12, 'cod_rgint__4': 1301, 'nome_rgint__4': 'Manaus', 'cod_uf__4': 13, 'cod_rgint__5': 1302, 'nome_rgint__5': 'Tefé', 'cod_uf__5': 13, 'cod_rgint__6': 1303, 'nome_rgint__6': 'Lábrea', 'cod_uf__6': 13, 'cod_rgint__7': 1304, 'nome_rgint__7': 'Parintins', 'cod_uf__7': 13, 'cod_rgint__8': 1401, 'nome_rgint__8': 'Boa Vista', 'cod_uf__8': 14, 'cod_rgint__9': 1402, 'nome_rgint__9': 'Rorainópolis - Caracaraí', 'cod_uf__9': 14, 'cod_rgint__10': 1501, 'nome_rgint__10': 'Belém', 'cod_uf__10': 15, 'cod_rgint__11': 1502, 'nome_rgint__11': 'Castanhal', 'cod_uf__11': 15, 'cod_rgint__12': 1503, 'nome_rgint__12': 'Marabá', 'cod_uf__12': 15, 'cod_rgint__13': 1504, 'nome_rgint__13': 'Redenção', 'cod_uf__13': 15, 'cod_rgint__14': 1505, 'nome_rgint__14': 'Santarém', 'cod_uf__14': 15, 'cod_rgint__15': 1506, 'nome_rgint__15': 'Altamira', 'cod_uf__15': 15, 'cod_rgint__16': 1507, 'nome_rgint__16': 'Breves' ... 299 parameters truncated ... 'nome_rgint__116': 'Caxias do Sul', 'cod_uf__116': 43, 'cod_rgint__117': 4308, 'nome_rgint__117': 'Santa Cruz do Sul - Lajeado', 'cod_uf__117': 43, 'cod_rgint__118': 5001, 'nome_rgint__118': 'Campo Grande', 'cod_uf__118': 50, 'cod_rgint__119': 5002, 'nome_rgint__119': 'Dourados', 'cod_uf__119': 50, 'cod_rgint__120': 5003, 'nome_rgint__120': 'Corumbá', 'cod_uf__120': 50, 'cod_rgint__121': 5101, 'nome_rgint__121': 'Cuiabá', 'cod_uf__121': 51, 'cod_rgint__122': 5102, 'nome_rgint__122': 'Cáceres', 'cod_uf__122': 51, 'cod_rgint__123': 5103, 'nome_rgint__123': 'Sinop', 'cod_uf__123': 51, 'cod_rgint__124': 5104, 'nome_rgint__124': 'Barra do Garças', 'cod_uf__124': 51, 'cod_rgint__125': 5105, 'nome_rgint__125': 'Rondonópolis', 'cod_uf__125': 51, 'cod_rgint__126': 5201, 'nome_rgint__126': 'Goiânia', 'cod_uf__126': 52, 'cod_rgint__127': 5202, 'nome_rgint__127': 'Itumbiara', 'cod_uf__127': 52, 'cod_rgint__128': 5203, 'nome_rgint__128': 'Rio Verde', 'cod_uf__128': 52, 'cod_rgint__129': 5204, 'nome_rgint__129': 'São Luís de Montes Belos - Iporá', 'cod_uf__129': 52, 'cod_rgint__130': 5205, 'nome_rgint__130': 'Porangatu - Uruaçu', 'cod_uf__130': 52, 'cod_rgint__131': 5206, 'nome_rgint__131': 'Luziânia - Águas Lindas de Goiás', 'cod_uf__131': 52, 'cod_rgint__132': 5301, 'nome_rgint__132': 'Distrito Federal', 'cod_uf__132': 53}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "regiao_inter_pkey"
+DETAIL:  Key (cod_rgint)=(1101) already exists.
+
+[SQL: INSERT INTO regiao_inter (cod_rgint, nome_rgint, cod_uf) VALUES (%(cod_rgint__0)s, %(nome_rgint__0)s, %(cod_uf__0)s), (%(cod_rgint__1)s, %(nome_rgint__1)s, %(cod_uf__1)s), (%(cod_rgint__2)s, %(nome_rgint__2)s, %(cod_uf__2)s), (%(cod_rgint__3)s, %(nom ... 7362 characters truncated ... s, %(nome_rgint__131)s, %(cod_uf__131)s), (%(cod_rgint__132)s, %(nome_rgint__132)s, %(cod_uf__132)s)]
+[parameters: {'cod_rgint__0': 1101, 'nome_rgint__0': 'Porto Velho', 'cod_uf__0': 11, 'cod_rgint__1': 1102, 'nome_rgint__1': 'Ji-Paraná', 'cod_uf__1': 11, 'cod_rgint__2': 1201, 'nome_rgint__2': 'Rio Branco', 'cod_uf__2': 12, 'cod_rgint__3': 1202, 'nome_rgint__3': 'Cruzeiro do Sul', 'cod_uf__3': 12, 'cod_rgint__4': 1301, 'nome_rgint__4': 'Manaus', 'cod_uf__4': 13, 'cod_rgint__5': 1302, 'nome_rgint__5': 'Tefé', 'cod_uf__5': 13, 'cod_rgint__6': 1303, 'nome_rgint__6': 'Lábrea', 'cod_uf__6': 13, 'cod_rgint__7': 1304, 'nome_rgint__7': 'Parintins', 'cod_uf__7': 13, 'cod_rgint__8': 1401, 'nome_rgint__8': 'Boa Vista', 'cod_uf__8': 14, 'cod_rgint__9': 1402, 'nome_rgint__9': 'Rorainópolis - Caracaraí', 'cod_uf__9': 14, 'cod_rgint__10': 1501, 'nome_rgint__10': 'Belém', 'cod_uf__10': 15, 'cod_rgint__11': 1502, 'nome_rgint__11': 'Castanhal', 'cod_uf__11': 15, 'cod_rgint__12': 1503, 'nome_rgint__12': 'Marabá', 'cod_uf__12': 15, 'cod_rgint__13': 1504, 'nome_rgint__13': 'Redenção', 'cod_uf__13': 15, 'cod_rgint__14': 1505, 'nome_rgint__14': 'Santarém', 'cod_uf__14': 15, 'cod_rgint__15': 1506, 'nome_rgint__15': 'Altamira', 'cod_uf__15': 15, 'cod_rgint__16': 1507, 'nome_rgint__16': 'Breves' ... 299 parameters truncated ... 'nome_rgint__116': 'Caxias do Sul', 'cod_uf__116': 43, 'cod_rgint__117': 4308, 'nome_rgint__117': 'Santa Cruz do Sul - Lajeado', 'cod_uf__117': 43, 'cod_rgint__118': 5001, 'nome_rgint__118': 'Campo Grande', 'cod_uf__118': 50, 'cod_rgint__119': 5002, 'nome_rgint__119': 'Dourados', 'cod_uf__119': 50, 'cod_rgint__120': 5003, 'nome_rgint__120': 'Corumbá', 'cod_uf__120': 50, 'cod_rgint__121': 5101, 'nome_rgint__121': 'Cuiabá', 'cod_uf__121': 51, 'cod_rgint__122': 5102, 'nome_rgint__122': 'Cáceres', 'cod_uf__122': 51, 'cod_rgint__123': 5103, 'nome_rgint__123': 'Sinop', 'cod_uf__123': 51, 'cod_rgint__124': 5104, 'nome_rgint__124': 'Barra do Garças', 'cod_uf__124': 51, 'cod_rgint__125': 5105, 'nome_rgint__125': 'Rondonópolis', 'cod_uf__125': 51, 'cod_rgint__126': 5201, 'nome_rgint__126': 'Goiânia', 'cod_uf__126': 52, 'cod_rgint__127': 5202, 'nome_rgint__127': 'Itumbiara', 'cod_uf__127': 52, 'cod_rgint__128': 5203, 'nome_rgint__128': 'Rio Verde', 'cod_uf__128': 52, 'cod_rgint__129': 5204, 'nome_rgint__129': 'São Luís de Montes Belos - Iporá', 'cod_uf__129': 52, 'cod_rgint__130': 5205, 'nome_rgint__130': 'Porangatu - Uruaçu', 'cod_uf__130': 52, 'cod_rgint__131': 5206, 'nome_rgint__131': 'Luziânia - Águas Lindas de Goiás', 'cod_uf__131': 52, 'cod_rgint__132': 5301, 'nome_rgint__132': 'Distrito Federal', 'cod_uf__132': 53}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+

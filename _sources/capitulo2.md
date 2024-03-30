@@ -16,7 +16,8 @@ kernelspec:
 
 # 2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)
 
-[Abrir no Google Colab](https://colab.research.google.com/https://github.com/Alexandrogschafer/Spatial-Database/blob/gh-pages/notebooks/capitulo2.ipynb)
+[Abrir no Google Colab](https://colab.research.google.com/github/Alexandrogschafer/Spatial-Database/blob/gh-pages/notebooks/bde_capitulo2.ipynb)
+
 
 SQL, que significa "Structured Query Language", é a linguagem de programação padrão usada para comunicar e manipular bancos de dados relacionais. Desde sua criação, tem sido uma ferramenta indispensável para os profissionais de banco de dados, permitindo-lhes criar, modificar, gerenciar e consultar dados de forma eficaz. O poder do SQL reside em sua capacidade de lidar com conjuntos de dados grandes e complexos com comandos concisos e expressões bem definidas. 
 
@@ -1018,19 +1019,22 @@ Antes de inserir os dados processados nas tabelas do banco de dados, é prudente
 ```{code-cell}
 %%sql
 -- Verificar regiao_inter
-SELECT * FROM regiao_inter;
+SELECT * FROM regiao_inter
+LIMIT 10;
 ```
 
 ```{code-cell}
 %%sql
 -- Verificar regiao_imed
-SELECT * FROM regiao_imed;
+SELECT * FROM regiao_imed
+LIMIT 10;
 ```
 
 ```{code-cell}
 %%sql
 -- Verificar censo_mun
-SELECT * FROM censo_mun;
+SELECT * FROM censo_mun
+LIMIT 20;
 ```
 
 Estas consultas SQL permitem verificar se as tabelas do banco de dados estão prontas para receber os dados. Ao confirmar que as tabelas estão vazias ou preparadas para a inserção, podemos proceder com a importação dos dados processados.
