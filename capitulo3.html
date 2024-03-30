@@ -1,0 +1,690 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3. FUNDAMENTOS E PRÁTICAS EM BANCOS DE DADOS ESPACIAIS &#8212; Bancos de Dados Espaciais</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'capitulo3';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Referências Bibliográficas" href="referencias.html" />
+    <link rel="prev" title="2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)" href="capitulo2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/postgis_python.png" class="logo__image only-light" alt="Bancos de Dados Espaciais - Home"/>
+    <script>document.write(`<img src="_static/postgis_python.png" class="logo__image only-dark" alt="Bancos de Dados Espaciais - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bancos de Dados Espaciais
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="capitulo1.html">1. FUNDAMENTOS DE BANCOS DE DADOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo2.html">2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. FUNDAMENTOS E PRÁTICAS EM BANCOS DE DADOS ESPACIAIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencias.html">Referências Bibliográficas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Alexandrogschafer/Spatial-Database" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Alexandrogschafer/Spatial-Database/issues/new?title=Issue%20on%20page%20%2Fcapitulo3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/capitulo3.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3. FUNDAMENTOS E PRÁTICAS EM BANCOS DE DADOS ESPACIAIS</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breve-historico-do-desenvolvimento-dos-bancos-de-dados-espaciais">3.1 Breve histórico do desenvolvimento dos bancos de dados espaciais</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evolucao-da-arquitetura-de-sistemas-de-informacoes-geograficas">3.2 Evolução da arquitetura de Sistemas de Informações Geográficas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escolha-entre-software-sig-desktop-e-banco-de-dados-espacial">3.2.1 Escolha entre Software SIG Desktop e banco de dados espacial</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-de-gerenciamento-de-banco-de-dados-sgbd-com-suporte-a-dados-espaciais">3.3 Sistemas de Gerenciamento de Banco de Dados (SGBD) com suporte a dados espaciais</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-extensao-espacial-postgis-do-postgresql">3.4 A extensão espacial PostGIS do PostgreSQL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-dados-espaciais-no-postgis">3.5 Tipos de dados espaciais no PostGIS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry">3.5.1 Geometry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geography">3.5.2 Geography</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raster">3.5.3 Raster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topology">3.5.4 Topology</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexacao-espacial">3.6 Indexação espacial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questoes-importantes-em-um-projeto-de-bancos-de-dados-espaciais">3.7 Questões importantes em um projeto de bancos de dados espaciais.</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="fundamentos-e-praticas-em-bancos-de-dados-espaciais">
+<h1>3. FUNDAMENTOS E PRÁTICAS EM BANCOS DE DADOS ESPACIAIS<a class="headerlink" href="#fundamentos-e-praticas-em-bancos-de-dados-espaciais" title="Permalink to this heading">#</a></h1>
+<p>A tecnologia geoespacial tem experimentado uma evolução constante, passando de simples mapas e imagens digitalizadas para ferramentas sofisticadas e integradas aplicáveis em diversas áreas, auxiliando na resolução de problemas, na tomada de decisão e no entendimento dos sistemas ambientais e sociais do planeta (Dangermond e Goodchild, 2020). Atualmente, as tecnologias geoespaciais, que englobam a Geoinformática e a Ciência da Informação Geográfica (GIScience), são indispensáveis não apenas para o planejamento e a gestão, mas também para o desenvolvimento sustentável em diferentes escalas.</p>
+<p>Ao longo das últimas décadas, a quantidade de dados coletados e armazenados vem crescendo exponencialmente. Esse fenômeno, muitas vezes descrito como “explosão de dados”, é impulsionado pela ubiquidade da internet, avanços tecnológicos em sensores e dispositivos de coleta de dados, bem como pela crescente digitalização de processos em todos os setores da sociedade. Estima-se que cerca de 80% dos dados coletados possuem uma componente espacial, evidenciando como a localização geográfica é intrínseca à maioria dos dados que coletamos. Esse acúmulo sem precedentes de dados espaciais destaca a necessidade de tecnologias de armazenamento e de processamento cada vez mais sofisticadas, capazes de lidar com essa grande quantidade de informações.</p>
+<p>A superação dos limites impostos pela dependência de interfaces gráficas de usuário (<em>Graphical User Interface - GUI</em>) em Sistemas de Informações Geográficas, através do domínio da linguagem SQL e de linguagens de programação, facilita a adoção de métodos sofisticados para a manipulação de dados espaciais. Nesse cenário, os bancos de dados espaciais surgem como uma alternativa não só para o armazenamento e o gerenciamento desses dados, como também para o seu processamento e a análise.</p>
+<p>Um banco de dados espacial é um banco de dados com tipos de dados projetados especificamente para armazenar objetos que tem uma componente espacial - esses tipos de dados podem ser adicionados às tabelas do banco de dados. Os dados armazenados geralmente são de natureza geográfica, como a localização de um ponto ou o limite de um lago. Um banco de dados espacial também fornece funções e índices para consultas e manipulação dos dados espaciais, que podem ser chamados a partir de uma linguagem de consulta, como a SQL. Apesar de muitas vezes serem utilizados apenas para armazenar dados espaciais, os bancos de dados espaciais podem fazer muito mais do que isso (Obe e Hsu, 2021), pois são projetados para armazenar, gerenciar e manipular objetos espaciais, tratando-os de maneira semelhante a outros tipos de dados.</p>
+<p>Para integrar dados espaciais em um banco de dados, utiliza-se tipos de dados específicos que são otimizados para operações espaciais, como <em>GEOMETRY</em> ou <em>GEOGRAPHY</em>. Tais tipos permitem o armazenamento de elementos vetoriais e suas propriedades associadas, possibilitando que o SGBD realize operações como sobreposições espaciais, cálculos de proximidade e análises topológicas.</p>
+<p>Os bancos de dados espaciais normalmente aderem a padrões estabelecidos por organizações como o Open Geospatial Consortium (OGC, 2023), que define padrões como o <em>Simple Features</em>, um padrão comum para representação de objetos geográficos.</p>
+<p>Os bancos de dados espaciais utilizam uma série de funções e métodos especializados para armazenar, indexar e consultar dados espaciais. Eles incluem:</p>
+<ul class="simple">
+<li><p>Funções geométricas e geográficas: Para calcular distâncias, áreas, perímetros, etc.;</p></li>
+<li><p>Índices espaciais: Como R-trees ou quad-trees, que tornam as operações de busca e recuperação muito mais rápidas do que as técnicas de indexação tradicionais;</p></li>
+<li><p>Consultas espaciais: Que permitem realizar buscas com base na localização e na relação espacial entre objetos, como encontrar todos os objetos que estão a uma determinada distância de um ponto. Além disso, as funções espaciais, implementadas por meio de consultas SQL, possibilitam a análise e a consulta de propriedades e relações espaciais entre os objetos. Essas funções são essenciais para extrair informações como distâncias, intersecções e adjacências.</p></li>
+</ul>
+<p>A integração entre tipos de dados espaciais, índices espaciais e funções espaciais proporciona uma estrutura tanto robusta quanto adaptável, assegurando eficiência no processamento de dados espaciais.</p>
+<div class="section" id="breve-historico-do-desenvolvimento-dos-bancos-de-dados-espaciais">
+<h2>3.1 Breve histórico do desenvolvimento dos bancos de dados espaciais<a class="headerlink" href="#breve-historico-do-desenvolvimento-dos-bancos-de-dados-espaciais" title="Permalink to this heading">#</a></h2>
+<p>O desenvolvimento dos bancos de dados espaciais reflete a evolução da capacidade humana de organizar e interpretar dados relacionados ao espaço físico. Tudo começou com a necessidade de mapear territórios, gerenciar recursos naturais e planejar o uso urbano. Os primeiros indícios desse tipo de sistema podem ser encontrados em mapas e nos registros cadastrais antigos, em que a informação espacial era documentada de forma manual e analógica. No entanto, foi com o advento da computação que os bancos de dados espaciais começaram a se desenvolver como um campo próprio.</p>
+<p>Nos anos 1960 e 1970, a integração dos sistemas de informações geográficas (SIG) com a tecnologia de banco de dados começou a tomar forma. A disponibilidade crescente de dados de sensoriamento remoto e o desenvolvimento de algoritmos complexos para o seu processamento foram essenciais para esse avanço.</p>
+<p>A evolução dos bancos de dados espaciais é marcada por uma série de inovações e a integração de funcionalidades geoespaciais em diversas plataformas. Desde os primórdios na década de 1970, quando Raymond Boyce e Donald Chamberlin, pesquisadores da IBM, desenvolveram a linguagem SQL, inspirados pelo trabalho de Edgar Frank Codd, até a ampla adoção comercial pela Oracle, a trajetória tem sido de expansão e melhoria nas capacidades de análise espacial.</p>
+<p>O desenvolvimento dos bancos de dados espaciais ao longo dos anos reflete um marco na tecnologia da informação geoespacial, começando em 1994 com o lançamento do Illustra Spatial por Michael Stonebraker, marcando a introdução do primeiro banco de dados SQL com tipos de dados e funções espaciais. Este esforço evoluiu rapidamente, com a Oracle introduzindo a Spatial Data Option (SDO) em 1995, desenvolvida em parceria com o Serviço Hidrográfico Canadense, seguida pela aquisição da Illustra pela Informix em 1996, que resultou na integração com o MapInfo através do Informix Spatial Datablade. A Oracle continuou a inovar com o lançamento do Oracle Spatial no Oracle 8i em 1998, incorporando protocolos de internet nativos.</p>
+<p>A necessidade de suporte avançado para geometria no PostgreSQL levou ao nascimento do PostGIS em 2001, um esforço liderado pela Refractions Research e Paul Ramsey. Em 2002 e 2003, a IBM lançou o DB2 Spatial Extender e, após a aquisição da Informix, lançou o Spatial Extender compatível com a suíte de produtos da Esri, destacando uma trajetória de colaboração e inovação contínua na integração de capacidades geoespaciais em sistemas de gerenciamento de banco de dados.
+Em 2003, o Open Geospatial Consortium realizou um marco significativo na história do processamento de dados geoespaciais com o lançamento do SQL/MM Spatial Standard. Este evento não apenas uniformizou a abordagem para a manipulação de dados espaciais nos sistemas de gestão de banco de dados, mas também ampliou significativamente a acessibilidade e a aplicabilidade do Spatial SQL.</p>
+<p>A adoção deste padrão por plataformas renomadas como Spatialite, Microsoft SQL e MySQL foi um testemunho do seu impacto transformador, facilitando uma interface comum para a manipulação e análise de dados geoespaciais. Essa padronização ofereceu aos desenvolvedores e analistas uma base sólida para a construção de aplicações complexas de mapeamento, análise territorial e gerenciamento de recursos, consolidando o Spatial SQL como uma ferramenta indispensável no contexto da tecnologia geoespacial.</p>
+<p>Entre 2005 e 2009, o cenário dos bancos de dados espaciais testemunhou avanços significativos, marcando uma era de amadurecimento e expansão das capacidades geoespaciais nos sistemas de gerenciamento de banco de dados (SGBD). Em 2005, o PostGIS consolidou sua posição como uma ferramenta para análise espacial ao lançar sua primeira versão estável, PostGIS 1.0.</p>
+<p>Poucos anos depois, em 2008, dois desenvolvimentos importantes ocorreram: a Microsoft introduziu suporte espacial no Microsoft SQL Server, ampliando as possibilidades de análise espacial no ambiente corporativo, e o SpatiaLite foi lançado como uma extensão espacial leve para o SQLite, oferecendo uma solução eficiente e compacta para aplicações que necessitam de capacidades geoespaciais em bancos de dados menores.</p>
+<p>Em 2009, o MySQL também ingressou no domínio geoespacial com o lançamento de suporte para dados geoespaciais na versão 4.1, evidenciando a crescente demanda e a importância da análise espacial em diversas plataformas de SGBD. Esses desenvolvimentos refletem a evolução contínua da tecnologia geoespacial, facilitando o acesso e a manipulação de dados espaciais em uma variedade de contextos e aplicações.</p>
+<p>Com o início do século XXI e o avanço da internet, os bancos de dados espaciais ganharam uma nova dimensão. A era dos dados massivos, ou Big Data, impulsionou o desenvolvimento de novas tecnologias para lidar com a escala e a complexidade dos dados espaciais. Serviços baseados em localização, como o Google Maps e o OpenStreetMap, revolucionaram a maneira como os indivíduos acessam e utilizam dados espaciais no cotidiano. Ao mesmo tempo, o desenvolvimento de padrões abertos e APIs facilitou a integração de dados espaciais em diversas aplicações, desde o planejamento urbano até a gestão de desastres.</p>
+<p>O foco no processamento de “big data” evidenciou a necessidade de integrar capacidades geoespaciais em tecnologias de análise de grandes volumes de dados. Desta maneira, entre 2015 e 2023, o campo da análise de dados geoespaciais testemunhou uma série de inovações e integrações em diversas plataformas e tecnologias de processamento de dados, refletindo o crescente reconhecimento da importância dos dados espaciais em análises avançadas.</p>
+<p>O início do GeoSpark em 2015, como uma extensão geoespacial do Apache Spark, marcou um avanço importante ao integrar funções geoespaciais em um motor de análise de grandes volumes de dados. Esta tendência continuou com o lançamento de funções GIS pelo GCP BigQuery em 2018, e em 2019, a AWS Redshift incorporou suporte para dados geoespaciais.
+O ano de 2021 foi particularmente notável, com o GeoSpark evoluindo para o Apache Sedona e sendo adotado no ecossistema Apache em modo de incubação, o Apache Pinot adicionando suporte para dados geoespaciais e o Snowflake lançando sua própria funcionalidade geoespacial.</p>
+<p>Em 2022, o Databricks anunciou suporte para índices espaciais H3, e em 2023, o DuckDB ampliou suas capacidades com suporte nativo para a extensão SPATIAL. Esses desenvolvimentos sublinham uma evolução contínua e a integração de capacidades geoespaciais em plataformas de análise de dados, destacando a demanda crescente e a aplicabilidade da análise espacial em diversas indústrias e casos de uso.</p>
+<p>Atualmente, os bancos de dados espaciais constituem componentes essenciais em diversos sistemas críticos, adaptando-se continuamente aos desenvolvimentos em computação em nuvem, inteligência artificial e aprendizado de máquina. Observa-se uma expansão significativa no âmbito dos bancos de dados SQL espaciais, Data Warehouses e ferramentas correlatas, marcada por uma adesão sem precedentes ao Spatial SQL. Esta tendência amplia as oportunidades de aplicação de um conhecimento unificado em variadas ferramentas, abrangendo tanto processos de ETL/ELT quanto sistemas de consulta distribuída, como Trino e PrestoDB, e reafirma a relevância do SQL espacial na engenharia de dados atual (Forrest, 2023). Tal evolução não somente evidencia progressos tecnológicos notáveis, mas também ressalta a importância crescente da análise espacial em processos decisórios baseados em localização, influenciando decisivamente a maneira como analisamos e compreendemos os dados geoespaciais no contexto digital moderno.</p>
+</div>
+<div class="section" id="evolucao-da-arquitetura-de-sistemas-de-informacoes-geograficas">
+<h2>3.2 Evolução da arquitetura de Sistemas de Informações Geográficas<a class="headerlink" href="#evolucao-da-arquitetura-de-sistemas-de-informacoes-geograficas" title="Permalink to this heading">#</a></h2>
+<p>A figura abaixo apresenta, de maneira esquemática e simplificada, a evolução da arquitetura de Sistemas de Informações Geográficas.</p>
+<p><img alt="Figura 5" src="_images/fig5.png" /></p>
+<p>Figura 5: Evolução da arquitetura de SIG (Fonte: Postgis, 2024)</p>
+<p><strong>Primeira Geração: Sistemas Fechados</strong></p>
+<p>A primeira geração dos Sistemas de Informações Geográficas (SIG) caracterizou-se pelo uso de sistemas fechados e proprietários. Neste estágio inicial, o gerenciamento e a manipulação de dados espaciais dependiam inteiramente de softwares especializados em SIG. Estes sistemas foram projetados para atender às demandas específicas de usuários cujos conjuntos de dados estavam completamente contidos dentro de seus domínios organizacionais. A natureza fechada desses sistemas refletia as limitações tecnológicas da época, bem como a falta de necessidade ou capacidade para compartilhar dados espaciais fora do ambiente organizacional. A falta de interoperabilidade com outros sistemas ou bancos de dados limitava a flexibilidade e a escalabilidade das análises espaciais.</p>
+<p><strong>Segunda Geração: Integração Parcial com Bancos de Dados Relacionais</strong></p>
+<p>A segunda geração de SIG marcou uma evolução importante, com a incorporação de alguns dados, predominantemente dados de “atributo” ou não espaciais, em bancos de dados relacionais. Esta integração representou um avanço em termos de gerenciamento de dados, permitindo uma melhor organização e acesso aos dados não espaciais associadas aos dados espaciais. No entanto, a geração ainda enfrentava limitações significativas devido à ausência de uma integração direta e completa dos dados espaciais nos bancos de dados. As características espaciais continuavam a ser tratadas separadamente dos dados de atributo, o que impedia análise e manipulação eficientes dos dados espaciais em sua totalidade. Essa abordagem resultava em uma flexibilidade ainda restrita e destacava a necessidade de sistemas mais integrados e capazes de lidar com todos os aspectos dos dados espaciais.</p>
+<p><strong>Terceira Geração: Fusão Completa com Bancos de Dados Espaciais</strong></p>
+<p>A inovação que definiu a terceira geração de SIG foi o desenvolvimento de bancos de dados espaciais autênticos, que tratavam as informações espaciais como objetos de banco de dados plenamente reconhecidos e integrados aos bancos de dados relacionais. Esta evolução representou uma mudança de paradigma na arquitetura de SIG, movendo o foco de sistemas dedicados exclusivamente ao SIG para uma orientação centrada em bancos de dados. Com essa fusão completa, os dados espaciais e de atributo passaram a ser gerenciados e analisados como um conjunto coeso, ampliando drasticamente as possibilidades de manipulação, análise e compartilhamento de dados espaciais. A integração plena dos dados espaciais aos bancos de dados relacionais não apenas facilitou análises espaciais complexas e multidimensionais, mas também estabeleceu uma nova era no gerenciamento dos dados espaciais, marcando um avanço tecnológico significativo na evolução dos SIGs.</p>
+<div class="section" id="escolha-entre-software-sig-desktop-e-banco-de-dados-espacial">
+<h3>3.2.1 Escolha entre Software SIG Desktop e banco de dados espacial<a class="headerlink" href="#escolha-entre-software-sig-desktop-e-banco-de-dados-espacial" title="Permalink to this heading">#</a></h3>
+<p>Dada as diferentes arquiteturas possíveis para um SIG, uma questão importante é qual adotar, especialmente quando se considera o uso de Sistemas de Informações Geográficas (SIG) desktop em contraposição aos bancos de dados espaciais, para projetos específicos.</p>
+<p>Esta escolha envolve diversos fatores críticos, como a natureza do projeto, os recursos disponíveis, o volume e a escala dos dados, além das necessidades de análise e de compartilhamento de informações.</p>
+<p>Os SIG desktop se destacam por suas interfaces intuitivas e funcionalidades avançadas para visualização, análise e edição de dados espaciais, atendendo bem às necessidades de usuários que demandam interações detalhadas com esses dados, além de ferramentas analíticas de fácil acesso. São particularmente úteis em contextos que requerem análise visual intensiva e manipulação direta de dados geográficos, embora possam ser limitados em projetos de grande escala ou que envolvam o gerenciamento de grandes conjuntos de dados.</p>
+<p>Em contrapartida, os bancos de dados espaciais apresentam uma solução escalável e flexível, ideal para o gerenciamento eficiente de grandes volumes de dados geoespaciais. Eles suportam consultas complexas e a integração de dados espaciais com diversos sistemas e aplicativos, facilitando o compartilhamento e a colaboração. Esta opção é vantajosa para projetos que necessitam de alta performance na manipulação de dados e que visam à disseminação de informações geográficas por meio de interfaces web ou móveis.</p>
+<p>Na sequência, apresentaremos algumas questões-chave que destacam as distinções entre bancos de dados espaciais e softwares SIG.</p>
+<p><strong>Bancos de dados espaciais:</strong></p>
+<ul class="simple">
+<li><p>Armazenamento e gerenciamento: Bancos de dados espaciais são projetados para armazenar grandes quantidades de dados espaciais de forma eficiente e segura. Eles são ideais para aplicações que exigem acesso concorrente por muitos usuários ou sistemas, gerenciamento de transações e integridade de dados em um ambiente multiusuário;</p></li>
+<li><p>Análise complexa: Para análises espaciais complexas que podem envolver a manipulação de grandes volumes de dados ou a automação de tarefas, os bancos de dados espaciais oferecem ferramentas robustas que podem ser integradas em scripts e aplicações personalizadas;</p></li>
+<li><p>Integração com outros sistemas: Eles facilitam a integração de dados espaciais com outros sistemas de TI empresariais, proporcionando uma plataforma unificada para dados espaciais e não espaciais;</p></li>
+<li><p>Serviços Web: Bancos de dados espaciais podem fornecer um backend robusto para aplicações baseadas na web, permitindo funcionalidades como mapas interativos e serviços de geolocalização em tempo real.</p></li>
+</ul>
+<p><strong>Software SIG:</strong></p>
+<ul class="simple">
+<li><p>Interface gráfica: Softwares como o QGIS e o ArcGIS têm interfaces gráficas de usuário (GUI) amigáveis, que permitem a visualização, edição e análise interativa de dados geográficos sem a necessidade de programação;</p></li>
+<li><p>Análise Visual e Cartografia: Esses programas são excelentes para tarefas de mapeamento e cartografia, permitindo aos usuários criar mapas detalhados e visualmente atraentes com relativa facilidade;</p></li>
+<li><p>Análises Espaciais Diretas: Eles oferecem diversas ferramentas para análises espaciais que podem ser realizadas diretamente através da Interface Gráfica do Usuário, o que é conveniente para usuários que não tem familiaridade com linguagens de consulta e/ou programação;</p></li>
+<li><p>Plugins e Extensões: Tanto o QGIS quanto o ArcGIS têm ecossistemas de plugins e extensões que adicionam funcionalidades específicas e permitem a personalização do software para necessidades particulares.</p></li>
+</ul>
+<p>Neste contexto, a escolha entre usar bancos de dados espaciais ou um software SIG (como o QGIS ou o ArcGIS) depende do escopo do projeto, do volume e da complexidade dos dados, das necessidades de integração e colaboração, e da experiência do usuário com programação. Em muitos casos, a melhor solução pode envolver o uso combinado de ambos: utilizando um banco de dados espacial para o armazenamento e o gerenciamento de dados e um software SIG para visualização e análise interativa.</p>
+</div>
+</div>
+<div class="section" id="sistemas-de-gerenciamento-de-banco-de-dados-sgbd-com-suporte-a-dados-espaciais">
+<h2>3.3 Sistemas de Gerenciamento de Banco de Dados (SGBD) com suporte a dados espaciais<a class="headerlink" href="#sistemas-de-gerenciamento-de-banco-de-dados-sgbd-com-suporte-a-dados-espaciais" title="Permalink to this heading">#</a></h2>
+<p>Alguns Sistemas de Gerenciamento de Bancos de Dados (SGBDs) possuem suporte a dados espaciais, que possibilitam a realização de consultas e de operações em dados espaciais. Isso significa que além das funcionalidades padrão de um SGBD, esses sistemas podem realizar operações complexas específicas para o tratamento de dados espaciais.</p>
+<p>Os bancos de dados com extensão espacial podem ser tanto relacionais quanto NoSQL. Apesar de os bancos de dados relacionais serem a base mais comum para extensões espaciais, a escolha entre um sistema relacional ou um NoSQL com capacidade espacial depende dos requisitos específicos do projeto. Por exemplo, se o foco está em transações complexas, integridade dos dados e relações entre tabelas, um banco de dados relacional com extensão espacial seria adequado. Por outro lado, se o projeto requer escalabilidade horizontal e a capacidade de lidar com grandes volumes de dados não estruturados ou semi-estruturados, um banco de dados NoSQL com funcionalidades espaciais pode ser mais apropriado.</p>
+<p>Em nosso curso, vamos focar nos bancos de dados relacionais. Existem diversos Sistemas de Gerenciamento de Banco de Dados (SGBDs) relacionais equipados com funcionalidades para o armazenamento e a manipulação de dados espaciais, diferenciando-se através de características e ferramentas projetadas para o gerenciamento de dados geográficos. Alguns dos SGBDs relacionais mais populares no que diz respeito ao suporte a dados espaciais são:</p>
+<p><em>PostgreSQL com a extensão PostGIS:</em> O PostgreSQL é um dos SGBDs relacionais de código aberto mais populares e robustos. A extensão PostGIS amplia capacidades do PostgreSQL, introduzindo tipos de dados geográficos e a possibilidade de realizar consultas espaciais complexas. Esta integração é reconhecida pela sua conformidade com os padrões do Open Geospatial Consortium (OGC) e pelo seu extenso conjunto de ferramentas espaciais.</p>
+<p><em>MySQL:</em> Este SGBD relacional de código aberto é conhecido por sua facilidade de uso e eficiência. O MySQL incorpora suporte para dados espaciais por meio de tipos de dados geométricos e um conjunto de funções espaciais para consultas básicas, adequando-se bem a aplicações que necessitam de operações espaciais menos complexas.</p>
+<p><em>Microsoft SQL Server:</em> Este SGBD comercial da Microsoft oferece recursos espaciais sólidos com seus tipos de dados Geography e Geometry. Com um conjunto completo de operações espaciais e boa integração com outras ferramentas do ecossistema Microsoft, o SQL Server é uma boa escolha quando se busca uma solução espacial integrada.</p>
+<p><em>Oracle Spatial and Graph:</em> A solução da Oracle para dados espaciais é voltada para organizações que exigem funcionalidades espaciais de alto nível e análises complexas. O Oracle Spatial and Graph oferece um conjunto sólido de ferramentas e recursos para o gerenciamento de dados espaciais e de redes.</p>
+<p><em>SQLite com a extensão SpatiaLite:</em> o SQLite é reconhecido por sua simplicidade e leveza, funcionando bem em aplicações móveis e dispositivos embarcados. A extensão SpatiaLite transforma o SQLite em um SGBD espacial ideal para aplicações que precisam de funcionalidades geográficas sem a sobrecarga de sistemas mais complexos.</p>
+<p><em>IBM Db2:</em> Este SGBD empresarial da IBM expande suas capacidades com o Db2 Spatial Extender, possibilitando o armazenamento, a análise e o gerenciamento de dados geográficos dentro do Db2, complementando as necessidades de organizações que lidam com grandes volumes de dados espaciais.</p>
+<p>Cada um desses SGBDs oferece um conjunto único de recursos que podem ser alinhados com as necessidades específicas de projetos de dados espaciais, variando de aplicações simples a soluções escaláveis e complexas. A seleção do SGBD apropriado deve ser feita com base na análise detalhada dos requisitos do projeto, na experiência da equipe de desenvolvimento, e nas metas de longo prazo da organização em relação à integração de dados geoespaciais.</p>
+</div>
+<div class="section" id="a-extensao-espacial-postgis-do-postgresql">
+<h2>3.4 A extensão espacial PostGIS do PostgreSQL<a class="headerlink" href="#a-extensao-espacial-postgis-do-postgresql" title="Permalink to this heading">#</a></h2>
+<p>A extensão espacial PostGIS, converte o SGBD PostgreSQL em um sistema de banco de dados espacial de alta eficiência. O PostGIS permite o gerenciamento de dados espaciais, incluindo tipos Geometry, Geography e Raster, enriquecendo assim o PostgreSQL com recursos capazes de atender a uma variedade de demandas no contexto do geoprocessamento.
+Desenvolvido inicialmente pela Refractions Research Inc., e agora supervisionado pela Open Source Geospatial Foundation (OSGeo), o PostGIS é apoiado por uma comunidade internacional de desenvolvedores e organizações do FOSS4G (Free and Open Source Software for Geospatial). Esta comunidade valoriza a extensão por seu conjunto de funcionalidades e  pela sua versatilidade.</p>
+<p>O suporte ao armazenamento de dados espaciais abrange formas geométricas em 2D e 3D, como pontos, linhas e polígonos. As funções espaciais do PostGIS, que abrangem desde a medição de distâncias até a execução de operações de união e interseção geométrica, são essenciais para otimizar consultas e análises espaciais. O uso de índices espaciais, como o GIST (Generalized Search Tree), otimiza ainda mais o desempenho dessas operações em grandes conjuntos de dados. Tais capacidades tornam o PostGIS uma ferramenta de grande relevância para profissionais na área do geoprocessamento que buscam realizar análises espaciais e gerenciamento de dados dentro de um ambiente de banco de dados.</p>
+<p>O PostgreSQL/PostGIS pode ser utilizado em conjunto com softwares SIG Desktop (como o QGIS e o ArcGIS), servidores de mapas (como o GeoServer e o MapServer), além de plataformas analíticas (como o Tableau). Esta interoperabilidade amplia sua funcionalidade, permitindo a integração em uma diversidade de aplicações e projetos. Tal compatibilidade facilita não apenas o armazenamento e a manipulação de dados espaciais, mas também a realização de análises geoespaciais complexas, visualizações avançadas e a disseminação de dados geográficos.</p>
+<p>A combinação do PostgreSQL/PostGIS e do Python representa outra possibilidade para a análise e a manipulação de dados geoespaciais. O Python, com sua rica biblioteca de módulos geoespaciais como GeoPandas, Shapely, e Pyproj, permite aos usuários realizar análises espaciais complexas e a manipulação de dados eficientemente. A integração com o PostGIS ocorre através de bibliotecas como Psycopg2, que facilita a conexão entre o ambiente Python e o banco de dados PostgreSQL, permitindo executar consultas SQL espaciais diretamente do código Python. Essa integração combina as capacidades de armazenamento e de gerenciamento de dados espaciais do PostGIS com a versatilidade e a facilidade do Python para análise de dados.</p>
+</div>
+<div class="section" id="tipos-de-dados-espaciais-no-postgis">
+<h2>3.5 Tipos de dados espaciais no PostGIS<a class="headerlink" href="#tipos-de-dados-espaciais-no-postgis" title="Permalink to this heading">#</a></h2>
+<p>A extensão PostGIS aprimora o PostgreSQL com a integração de quatro tipos de dados: Geometry, Geography, Raster e Topology. A compreensão desses tipos de dados é essencial para o uso do PostGIS. A seguir, detalharemos cada um deles.</p>
+<div class="section" id="geometry">
+<h3>3.5.1 Geometry<a class="headerlink" href="#geometry" title="Permalink to this heading">#</a></h3>
+<p>No início do PostGIS, o Geometry era o único tipo de dado disponível. O tipo de dados Geometry recebeu este nome por ser baseado na geometria analítica. Todos os subtipos de Geometry pressupõem um sistema de coordenadas cartesianas: linhas paralelas nunca se encontram, o teorema de Pitágoras é aplicável, as distâncias entre as coordenadas são uniformes em toda a extensão e assim por diante (Obe e Hsu, 2021). Os objetos Geometry são armazenados em um sistema de coordenadas plano, o que os torna ideais para operações e análises que pressupõem uma superfície plana. Esse modelo é particularmente eficaz para trabalhar com áreas geográficas menores, onde a curvatura da Terra tem impacto mínimo e pode ser ignorada sem comprometer significativamente a precisão dos resultados.</p>
+<p><strong>Hierarquia de dados do tipo Geometry</strong></p>
+<p>No contexto do tipo Geometry há uma série de subtipos que representam diferentes formas geométricas. A organização desses subtipos segue uma estrutura hierárquica que reflete a complexidade e a diversidade dos dados espaciais. A figura abaixo exibe os subtipos mais comumente utilizados:</p>
+<p><img alt="Figura 6" src="_images/fig6.png" /></p>
+<p>Figura 6: Hierarquia de dados no PostGIS (Fonte: Postgis, 2024).</p>
+<p>No topo da hierarquia está o tipo “GEOMETRY”, que serve como a base para todas as formas geométricas. A partir dessa classe raiz, derivam-se especializações que representam as diversas formas e configurações que os dados espaciais podem assumir.</p>
+<p>Nessa estrutura, “GEOMETRY” é especializado em quatro categorias principais: “POINT”, “CURVE”, “SURFACE” e “GEOMETRYCOLLECTION”. O tipo “POINT” é o mais simples, representando uma localização única no espaço. A categoria “CURVE” é uma abstração que se especializa em “LINESTRING”, denotando uma série de pontos conectados que formam uma linha contínua. Por sua vez, “SURFACE” é especializada em “POLYGON”, que define uma área delimitada por um ou mais contornos fechados.</p>
+<p><img alt="Figura 7" src="_images/fig7.png" /></p>
+<p>Figura 7: Tipos de geometrias no PostGIS (Fonte: Wu, 2021).</p>
+<p>A categoria “GEOMETRYCOLLECTION” representa uma coleção de elementos geométricos, que podem ser de um único tipo ou de tipos variados. Esta se subdivide em especializações mais específicas, como “MULTISURFACE” e “MULTICURVE”. “MULTISURFACE” inclui coleções de “POLYGON”, conhecidas como “MULTIPOLYGON”, proporcionando uma maneira de agrupar múltiplas áreas como uma única entidade geométrica. “MULTICURVE”, por outro lado, abrange coleções de “LINESTRING”, denominadas “MULTILINESTRING”, facilitando o manejo de múltiplas linhas como um único objeto. Adicionalmente, “GEOMETRYCOLLECTION” inclui “MULTIPOINT”, que agrupa vários pontos em uma entidade geométrica coletiva.</p>
+<p>Essa estrutura hierárquica assegura a organização lógica dos tipos geométricos no PostGIS, além de facilitar a implementação de operações e análises espaciais.</p>
+</div>
+<div class="section" id="geography">
+<h3>3.5.2 Geography<a class="headerlink" href="#geography" title="Permalink to this heading">#</a></h3>
+<p>O tipo de dado “Geography” no PostGIS é distinto de “Geometry” por sua premissa inicial que estabelece todos os dados em um sistema de coordenadas geodésicas, primariamente utilizando o SRID 4326 (WGS-84). Essa especificidade proporcionou uma simplificação significativa para os usuários do PostGIS que trabalham com dados geoespaciais em um contexto global (Obe e Hsu, 2021).</p>
+<p>Com a introdução do PostGIS 2.2, houve uma expansão na funcionalidade do tipo de dado “Geography”, permitindo suporte a qualquer sistema de referência espacial que opere com base em coordenadas geodésicas. Embora o SRID 4326 continue sendo o padrão e seja adotado automaticamente na ausência de especificação do SRID, essa atualização trouxe uma maior flexibilidade. A inclusão do suporte a diversos sistemas de referência espacial fundamentados em coordenadas geodésicas não apenas aumentou a utilidade prática do tipo “Geography”, mas também fortaleceu o PostGIS como uma ferramenta abrangente no contexto do Geoprocessamento.</p>
+<p>Apesar dessas inovações, é importante notar que o tipo “Geography” é otimizado para aplicações geodésicas e, consequentemente, o suporte estende-se principalmente a subtipos fundamentais como pontos, linhas (linestrings) e polígonos. O suporte para dimensões além do espaço bidimensional ainda é limitado (Obe e Hsu, 2021).</p>
+</div>
+<div class="section" id="raster">
+<h3>3.5.3 Raster<a class="headerlink" href="#raster" title="Permalink to this heading">#</a></h3>
+<p>Os dados do tipo Raster ou matriciais, assim como os dados do tipo Geometry, utilizam coordenadas cartesianas e um sistema de referência espacial. No entanto, ao invés de dados vetoriais, os dados Raster são representados como uma matriz n-dimensional composta por pixels e bandas. As bandas determinam o número total de matrizes presentes, com cada pixel armazenando um valor específico para cada banda. Por exemplo, um Raster de 3 bandas, como uma imagem RGB, teria 3 valores para cada pixel correspondendo às bandas Vermelho-Verde-Azul (PostGIS, 2023).</p>
+<p>Ao contrário de outros tipos de dados espaciais do PostGIS, os dados Raster podem ser armazenados no banco de dados ou fora dele. Quando armazenados fora do banco de dados, o campo Raster contém apenas os metadados que definem a largura, a altura e a caixa delimitadora, bem como uma referência ao arquivo e ao local do arquivo que o bloco Raster referencia. O carregador Raster2pgsql, que acompanha o PostGIS, é capaz de dividir Rasters maiores em blocos menores para armazená-los no banco de dados (Obe e Hsu, 2021).</p>
+</div>
+<div class="section" id="topology">
+<h3>3.5.4 Topology<a class="headerlink" href="#topology" title="Permalink to this heading">#</a></h3>
+<p>Os dados do tipo Topology, incorporados no PostGIS a partir da versão 2.0, vão além do armazenamento e da manipulação tradicional de geometrias ao permitir a modelagem de relações espaciais complexas e interconexões entre elementos geográficos. A topologia não está preocupada com a forma e a localização exata das geometrias, mas com como elas estão conectadas entre si. Ao focar na estrutura e nos relacionamentos entre pontos, linhas (arestas) e polígonos (faces), o modelo de topologia facilita análises espaciais que seriam desafiadoras ou ineficientes com modelos puramente geométricos.</p>
+<p>Um exemplo de aplicação da topologia seria o caso de dados de parcelas (lotes de terra), em que deve-se garantir que a modificação no limite de uma parcela resulte automaticamente no ajuste de todas as outras parcelas que compartilham esse mesmo limite.</p>
+<p>O suporte à topologia no PostGIS é implementado através de uma extensão específica que adiciona uma série de tipos de dados, funções e procedimentos armazenados para trabalhar com dados topológicos. Isso permite aos usuários do PostGIS construir e manipular modelos de dados que representam de forma mais fiel as complexidades do mundo real.</p>
+</div>
+</div>
+<div class="section" id="indexacao-espacial">
+<h2>3.6 Indexação espacial<a class="headerlink" href="#indexacao-espacial" title="Permalink to this heading">#</a></h2>
+<p>Nos bancos de dados tradicionais, a implementação de índices é fundamental para garantir acesso rápido e eficiente a conjuntos específicos de dados. Sem a indexação, qualquer busca por uma geometria exigiria um “varredura sequencial” de cada registro no banco de dados. A indexação acelera a busca, organizando os dados em uma árvore de pesquisa que pode ser rapidamente percorrida para encontrar um registro específico.</p>
+<p>Índices baseados em B-tree, que organizam dados numa estrutura hierárquica de árvore de acordo com uma ordem de classificação natural, são amplamente usados para tipos de dados convencionais, como números, textos e datas. Entretanto, devido às peculiaridades dos dados espaciais, principalmente verificações de sobreposição ou se uma geometria contém ou está contida em outra geometria, torna os índices B-tree inadequados para uma indexação eficiente.</p>
+<p>Para contornar este problema, os bancos de dados espaciais recorrem ao conceito de “índice espacial”. Este tipo de índice é projetado para identificar objetos dentro de uma área delimitadora específica, conhecida como caixa delimitadora (bounding box). Na figura abaixo apresentamos exemplos de caixas delimitadoras de geometrias do tipo linha e do tipo polígono.</p>
+<p><img alt="Figura 8" src="_images/fig8.png" /></p>
+<p>Figura 8: Exemplos de caixas delimitadoras (Fonte: PostGIS, 2024).</p>
+<p>Uma caixa delimitadora é definida como o menor retângulo, alinhado aos eixos coordenados, capaz de encapsular completamente um objeto espacial. Essa simplificação permite que questões complexas, como determinar se “A está contido em B”, sejam convertidas em operações computacionais mais simples e eficientes, visto que comparar retângulos é substancialmente menos complexo do que analisar formas poligonais detalhadas (PostGIS, 2023).</p>
+<p>Diferentemente dos índices B-tree, que visam precisão absoluta, os índices espaciais priorizam a obtenção de resultados aproximados, buscando velocidade e eficiência. Assim, consultas como “quais objetos estão contidos neste polígono?” são reinterpretadas pelo índice espacial para questionar “quais objetos têm caixas delimitadoras dentro da caixa delimitadora deste polígono?”.</p>
+<p>A indexação espacial no PostGIS normalmente é realizada usando o R-tree ou variações deste, como o GiST (Generalized Search Tree). Um R-tree é uma estrutura de dados de árvore que organiza objetos espaciais usando as caixas delimitadoras no formato de retângulos.</p>
+<p>O GiST é uma estrutura de dados mais genérica que pode ser configurada para suportar diferentes tipos de índices, incluindo índices espaciais. No contexto do PostGIS, os índices GiST são usados para implementar R-tree, suportando não apenas retângulos delimitadores, mas também outras formas geométricas complexas.
+Essas estruturas de dados permitem organizar os objetos espaciais de maneira que as consultas espaciais possam ser realizadas rapidamente, minimizando o número de objetos espaciais a serem verificados.</p>
+<p>A figura abaixo apresenta um exemplo esquemático de uma R-Tree.</p>
+<p><img alt="Figura9" src="_images/fig9.png" /></p>
+<p>Figura 9: Conjunto de retângulos indexados por uma R-Tree e a estrutura correspondente da R-Tree (Fonte: <a class="reference external" href="http://cglab.ca">cglab.ca</a>, 2024).</p>
+<p>Nesta figura, cada nó da árvore contém entradas que representam seus filhos (para nós internos) ou objetos espaciais, com cada entrada contendo um retângulo que envolve completamente o objeto ou os retângulos de todos os filhos. Isso permite que as consultas espaciais ignorem partes do espaço que não tem interseção com a área de interesse.</p>
+<p>Tomemos como exemplo a figura abaixo, em que temos uma linha vermelha que intersecciona o polígono em formato de estrela, além de uma linha azul e uma linha verde, que não têm interseção com esse polígono. As linhas vermelha e azul estão contidas dentro de caixas delimitadoras que interseccionam a caixa delimitadora da estrela.</p>
+<p><img alt="Figura 10" src="_images/fig10.png" /></p>
+<p>Figura 10: Exemplo de processo de execução de uma R-Tree (Fonte: PostGIS, 2024).</p>
+<p>A aplicação da indexação espacial neste conjunto de geometrias consiste basicamente em duas etapas.</p>
+<p>A primeira etapa envolve a criação de uma estrutura de dados (R-Tree), onde cada objeto geométrico é envolvido por uma caixa delimitadora. Essas caixas são então organizadas hierarquicamente. Caixas próximas entre si são agrupadas dentro de caixas delimitadoras maiores, formando uma cadeia que abrange desde os objetos individuais até a totalidade do espaço considerado. Esse agrupamento hierárquico é fundamental para otimizar as consultas espaciais subsequentes.</p>
+<p>A segunda etapa é a consulta propriamente dita. Quando se deseja determinar a interseção entre objetos geométricos, como identificar quais linhas cruzam um determinado polígono, o sistema recorre à R-Tree construída anteriormente. Inicialmente, verifica-se as caixas delimitadoras para uma eliminação rápida de candidatos não pertinentes — por exemplo, a linha verde, cuja caixa delimitadora não intersecciona a caixa do polígono de interesse é prontamente descartada. A seguir, realiza-se uma verificação mais detalhada das caixas que possuem potencial de interseção, para confirmar ou refutar o contato direto entre as geometrias envolvidas.</p>
+</div>
+<div class="section" id="questoes-importantes-em-um-projeto-de-bancos-de-dados-espaciais">
+<h2>3.7 Questões importantes em um projeto de bancos de dados espaciais.<a class="headerlink" href="#questoes-importantes-em-um-projeto-de-bancos-de-dados-espaciais" title="Permalink to this heading">#</a></h2>
+<p>O projeto de um banco de dados espaciais envolve a consideração de vários fatores para garantir a eficiência, a performance e a integridade dos dados. Dentre eles:</p>
+<p><em>Modelagem de Dados Espaciais:</em> A modelagem de dados espaciais requer uma compreensão clara dos tipos de dados geográficos que serão armazenados, como pontos, linhas e polígonos. Os dados espaciais muitas vezes precisam ser vinculados a dados alfanuméricos que forneçam contexto adicional, como nomes de ruas ou tipos de uso do solo.</p>
+<p><em>Esquema de Banco de Dados:</em> Um esquema de banco de dados bem projetado para dados espaciais deve incluir tabelas otimizadas para armazenar dados geométricos e suas propriedades associadas. Isso geralmente envolve o uso de tipos de dados espaciais específicos e funções que são otimizadas para armazenar e realizar operações em dados geoespaciais.</p>
+<p><em>Indexação Espacial:</em> A indexação é importante em bancos de dados espaciais devido à complexidade e ao tamanho dos conjuntos de dados. Estruturas de indexação como R-trees são comumente usadas para melhorar a performance das consultas, permitindo que o banco de dados encontre rapidamente elementos dentro de uma determinada área.</p>
+<p><em>Sistemas de Referência Espacial:</em> Os dados espaciais normalmente estão associados a um Identificador do sistema de referência espacial (Spatial Reference System Identifier - SRID). É importante definir e manter a consistência do SRID em toda a base de dados para garantir que as análises e as visualizações sejam precisas.</p>
+<p><em>Integração com GIS:</em> Os bancos de dados espaciais geralmente precisam se integrar com software SIG para a visualização e a análise de dados. Isso significa que o projeto do banco de dados deve considerar como os dados serão acessados e manipulados por esses sistemas externos.</p>
+<p><em>Performance e Escalabilidade:</em> Dada a grande quantidade de dados espaciais e a necessidade de realizar operações complexas, o banco de dados precisa ser projetado para alta performance e escalabilidade. Isso pode envolver técnicas como particionamento de dados, balanceamento de carga e otimização de consultas.</p>
+<p><em>Integridade e Consistência:</em> Assim como em outros tipos de bancos de dados, manter a integridade e a consistência dos dados é fundamental. Em dados espaciais, isso também significa manter a precisão das formas geométricas e garantir que as relações espaciais sejam corretamente mantidas.</p>
+<p><em>Segurança:</em> Dados espaciais podem ser sensíveis, especialmente quando ligados a informações pessoais ou de segurança nacional. Por isso, é importante implementar medidas de segurança adequadas, como controle de acesso, autenticação e criptografia.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="capitulo2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="referencias.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Referências Bibliográficas</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breve-historico-do-desenvolvimento-dos-bancos-de-dados-espaciais">3.1 Breve histórico do desenvolvimento dos bancos de dados espaciais</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evolucao-da-arquitetura-de-sistemas-de-informacoes-geograficas">3.2 Evolução da arquitetura de Sistemas de Informações Geográficas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#escolha-entre-software-sig-desktop-e-banco-de-dados-espacial">3.2.1 Escolha entre Software SIG Desktop e banco de dados espacial</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-de-gerenciamento-de-banco-de-dados-sgbd-com-suporte-a-dados-espaciais">3.3 Sistemas de Gerenciamento de Banco de Dados (SGBD) com suporte a dados espaciais</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-extensao-espacial-postgis-do-postgresql">3.4 A extensão espacial PostGIS do PostgreSQL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipos-de-dados-espaciais-no-postgis">3.5 Tipos de dados espaciais no PostGIS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometry">3.5.1 Geometry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geography">3.5.2 Geography</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#raster">3.5.3 Raster</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topology">3.5.4 Topology</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexacao-espacial">3.6 Indexação espacial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questoes-importantes-em-um-projeto-de-bancos-de-dados-espaciais">3.7 Questões importantes em um projeto de bancos de dados espaciais.</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexandro Gularte Schafer
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
