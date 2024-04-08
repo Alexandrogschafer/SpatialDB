@@ -1,0 +1,829 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4. TRABALHANDO COM DADOS ESPACIAIS NO POSTGIS &#8212; Bancos de Dados Espaciais</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'capitulo4';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Referências Bibliográficas" href="referencias.html" />
+    <link rel="prev" title="3. FUNDAMENTOS E PRÁTICAS EM BANCOS DE DADOS ESPACIAIS" href="capitulo3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/postgis_python.png" class="logo__image only-light" alt="Bancos de Dados Espaciais - Home"/>
+    <script>document.write(`<img src="_static/postgis_python.png" class="logo__image only-dark" alt="Bancos de Dados Espaciais - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bancos de Dados Espaciais
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="capitulo1.html">1. FUNDAMENTOS DE BANCOS DE DADOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo2.html">2. INTRODUÇÃO À STRUCTURED QUERY LANGUAGE (SQL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="capitulo3.html">3. FUNDAMENTOS E PRÁTICAS EM BANCOS DE DADOS ESPACIAIS</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. TRABALHANDO COM DADOS ESPACIAIS NO POSTGIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencias.html">Referências Bibliográficas</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Alexandrogschafer/Spatial-Database" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Alexandrogschafer/Spatial-Database/issues/new?title=Issue%20on%20page%20%2Fcapitulo4.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/capitulo4.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4. TRABALHANDO COM DADOS ESPACIAIS NO POSTGIS</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducao-ao-pgadmin4">4.1 Introdução ao pgAdmin4</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criacao-de-bancos-de-dados">Criação de Bancos de Dados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execucao-de-consultas-sql">Execução de Consultas SQL:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mais-sobre-esquemas-em-bancos-de-dados">Mais sobre esquemas em bancos de dados</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-geometrias-com-wkt">4.2 Criando geometrias com WKT</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-geometrias-com-wkt-no-postgis">4.2.1 Criando Geometrias com WKT no PostGIS</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificando-a-validade-de-geometrias">4.3 Verificando a validade de geometrias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-e-inserindo-dados-do-tipo-geometry-em-tabelas">4.4 Criando e inserindo dados do tipo Geometry em tabelas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#salvando-o-codigo-em-sql">Salvando o código em .sql.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="trabalhando-com-dados-espaciais-no-postgis">
+<h1>4. TRABALHANDO COM DADOS ESPACIAIS NO POSTGIS<a class="headerlink" href="#trabalhando-com-dados-espaciais-no-postgis" title="Permalink to this heading">#</a></h1>
+<p>Neste capítulo, apresentamos uma introdução sobre a manipulação de dados espaciais utilizando o PostGIS, a extensão do sistema de gerenciamento de banco de dados PostgreSQL que habilita o suporte para objetos geográficos.</p>
+<p>Embora possamos utilizar o PostrgeSQL e o PostGIS com o Python no ambiente do Google Colab, optamos por utilizar ferramentas que proporcionam uma melhor visualização da estrutura do banco de dados e da manipulação dos dados geoespaciais e alfanuméricos, o que é importante quando se está dando os primeiros passos nessa área.</p>
+<p>Para que seja possível realizar as atividades do capítulo, você deve instalar em seu computador o PostgreSQL, o PostGIS e o Pgadmin4, além do Qgis.</p>
+<p>Inicialmente, vamos explorar as principais ferramentas do pgAdmin 4, uma interface gráfica de usuário destinada à administração do PostgreSQL. O pgAdmin 4 proporciona uma plataforma intuitiva para a execução de tarefas administrativas e consultas em bancos de dados.</p>
+<p>Em seguida, criaremos geometrias utilizando a linguagem Well-Known Text (WKT), um padrão textual para representação de formas geométricas. Apresentaremos a fundamentação para a criação de pontos, linhas, polígonos e outras geometrias básicas no contexto dos dados geoespaciais. Logo após, criaremos as tabelas no banco de dados para armazenar os dados do tipo geometry.</p>
+<p>Por fim, concluiremos o capítulo com a integração entre o PostGIS e o QGIS, o que facilita a visualização, a edição e a análise de dados geoespaciais. Trabalharemos no processo de configuração do banco de dados PostGIS no ambiente QGIS, bem como no procedimento para importação de shapefiles para o banco de dados diretamente a partir do QGIS.</p>
+<div class="section" id="introducao-ao-pgadmin4">
+<h2>4.1 Introdução ao pgAdmin4<a class="headerlink" href="#introducao-ao-pgadmin4" title="Permalink to this heading">#</a></h2>
+<p>O pgAdmin 4 é uma ferramenta de administração e desenvolvimento de código aberto para PostgreSQL. Como a interface gráfica de usuário (GUI) oficial do PostgreSQL, ele permite que os usuários interajam com o banco de dados PostgreSQL através de uma interface web ou desktop, facilitando a execução das tarefas inerentes ao trabalho em banco de dados.</p>
+<p>Para começar, você precisará instalar o pgAdmin 4 no seu sistema. Visite o site oficial do pgAdmin (<a class="reference external" href="https://www.pgadmin.org/download/">https://www.pgadmin.org/download/</a>) e escolha a versão adequada para o seu sistema operacional. Siga as instruções de instalação fornecidas no site para completar a instalação.</p>
+<p>Após instalar o pgAdmin4, abra o aplicativo e siga as etapas elencadas a seguir. A figura abaixo apresenta a tela inicial do pgAdmin.</p>
+<p><img alt="Figura 41" src="_images/fig4_1.png" /></p>
+<p>Figura : Tela inicial do pgAdmin4</p>
+<p>Com o pgAdmin 4 aberto, conecte-se ao seu servidor PostgreSQL clicando no Painel de Navegação (Browser Pane), conforme indicado na figura abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_2.png" /></p>
+<p>Será solicitado a senha que você definiu no processo de instalação do PostgreSQL. Insira a senha e pressione OK.</p>
+<p><img alt="Figura 41" src="_images/fig4_3.png" /></p>
+<p>Ao clicar no servidor (no caso de nosso livro-texto, o PostregSQL 15), a árvore do servidor se expande conforme figura abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_4.png" /></p>
+<p>Antes de prosseguir com nosso estudo, vamos explorar a interface do usuário do pgAdmin4. A parte superior direita da interface do usuário (figura a seguir) apresenta várias abas que fornecem acesso rápido a diferentes tipos de informações e ferramentas para gerenciar objetos de banco de dados no PostgreSQL.</p>
+<p><img alt="Figura 41" src="_images/fig4_5.png" /></p>
+<ol class="arabic simple">
+<li><p>Dashboard: A aba “Dashboard” fornece uma visão geral do estado atual do servidor ou do banco de dados selecionado, incluindo estatísticas em tempo real, como uso de CPU, memória, atividades de disco, e sessões ativas. É uma ferramenta útil para monitorar a saúde e o desempenho do sistema.</p></li>
+<li><p>Properties (Propriedades): Esta aba exibe as propriedades do objeto de banco de dados atualmente selecionado, como um servidor, banco de dados, tabela, etc. Aqui, você pode ver detalhes como nome, proprietário, encoding (codificação) para bancos de dados, e outras configurações específicas do objeto.</p></li>
+<li><p>SQL: A aba “SQL” mostra o código SQL gerado pelo pgAdmin para criar ou modificar o objeto selecionado. É uma funcionalidade educativa e prática, pois permite que os usuários vejam e aprendam o SQL correspondente às operações realizadas através da interface gráfica, além de permitir a edição e execução direta do SQL.</p></li>
+<li><p>Statistics (Estatísticas): A aba “Statistics” oferece informações detalhadas sobre o desempenho e utilização do objeto selecionado, como índices de tabelas, uso de memória e estatísticas de acesso. É essencial para a análise e a otimização do desempenho de objetos de banco de dados.</p></li>
+<li><p>Dependencies (Dependências): Esta aba lista todos os objetos que dependem do objeto selecionado, ajudando a entender as relações e dependências entre diferentes objetos no banco de dados. É importante no conteto da manutenção do banco de dados, especialmente ao considerar modificações que podem afetar outros objetos.</p></li>
+<li><p>Dependents (Dependentes): Similar à aba “Dependencies”, mas mostrando todos os objetos dos quais o objeto selecionado depende. Essa visão ajuda a garantir que as alterações nos objetos dependentes não afetarão negativamente o objeto em questão.</p></li>
+<li><p>Processes (Processos): A aba “Processes” exibe uma lista dos processos atuais em execução no servidor PostgreSQL, incluindo consultas em andamento, quem as está executando e há quanto tempo estão rodando. Essa ferramenta é útil para monitorar e gerenciar a carga de trabalho no servidor, permitindo identificar e, se necessário, terminar processos que estão consumindo recursos excessivos ou travados.</p></li>
+</ol>
+<p>Voltando para o Painel de Navegação, vamos explorar os componentes de um banco de dados do PostgreSQL. Para tanto, clique em “Databases” e depois em “postgres”. O banco de dados “postgres” é um banco de dados de sistema que o PostgreSQL cria por padrão, e é comumente usado como um ponto de partida para os administradores de banco de dados quando eles estão configurando seu ambiente PostgreSQL ou executando operações administrativas.</p>
+<p><img alt="Figura 41" src="_images/fig4_6.png" /></p>
+<ol class="arabic simple">
+<li><p>Casts: No contexto de bancos de dados, um “cast” é uma operação que converte um valor de um tipo de dados para outro. No PostGIS/PostgreSQL, os casts são usados para transformar dados espaciais de um formato para outro, ou para converter entre tipos de dados espaciais e tipos de dados primitivos, como strings ou números, quando necessário.</p></li>
+<li><p>Catalogs: Os “catalogs” são conjuntos de tabelas do sistema que armazenam metadados sobre o banco de dados, como informações sobre tabelas, colunas, tipos de dados, funções e outros objetos de banco de dados. Eles são essenciais para o funcionamento interno do PostgreSQL e do PostGIS, permitindo que o sistema gerencie eficientemente os dados e as operações.</p></li>
+<li><p>Event Triggers: Triggers de evento são procedimentos armazenados que são automaticamente executados ou disparados em resposta a eventos específicos no banco de dados, como a criação ou alteração de esquemas ou objetos. No PostGIS, eles podem ser usados para automatizar tarefas de manutenção ou para garantir a integridade dos dados espaciais.</p></li>
+<li><p>Extensions: Extensões são pacotes que estendem a funcionalidade do PostgreSQL com recursos adicionais. O PostGIS é um exemplo de uma extensão, adicionando suporte a dados espaciais. Outras extensões podem oferecer funcionalidades de indexação avançada, tipos de dados adicionais, funções matemáticas, entre outros.</p></li>
+<li><p>Foreign Data Wrappers (FDW): São componentes que permitem ao PostgreSQL acessar dados armazenados em sistemas de armazenamento externos, como outros bancos de dados SQL, fontes de dados NoSQL, ou arquivos. Isso possibilita consultas e operações que integram dados de diferentes fontes diretamente no PostGIS.</p></li>
+<li><p>Languages: Refere-se às linguagens de programação suportadas pelo PostgreSQL para escrever funções ou procedimentos armazenados. Além do SQL, o PostgreSQL suporta várias linguagens, como PL/pgSQL (uma linguagem procedural), PL/Python, PL/Perl, entre outras, permitindo a criação de lógicas complexas de manipulação de dados.</p></li>
+<li><p>Publications: Parte da funcionalidade de replicação lógica do PostgreSQL, as publicações permitem especificar conjuntos de dados (como tabelas) para serem replicados para outros bancos de dados PostgreSQL. Isso é útil para distribuir dados entre diferentes locais ou sistemas.</p></li>
+<li><p>Schemas: Esquemas são como “pastas” dentro de um banco de dados que permitem organizar e gerenciar objetos de banco de dados, como tabelas, funções e views. Isso facilita a gestão de grandes bancos de dados e permite múltiplos projetos ou usuários coexistirem no mesmo banco de dados sem interferência.</p></li>
+<li><p>Subscriptions: Complementando as publicações na replicação lógica, as assinaturas permitem que um banco de dados PostgreSQL “assine” publicações de outro banco de dados, recebendo e aplicando automaticamente as atualizações. Isso é especialmente útil para manter sincronizados bancos de dados em locais diferentes, inclusive com dados espaciais.</p></li>
+</ol>
+<div class="section" id="criacao-de-bancos-de-dados">
+<h3>Criação de Bancos de Dados<a class="headerlink" href="#criacao-de-bancos-de-dados" title="Permalink to this heading">#</a></h3>
+<p>Para criar um novo banco de dados, clique com o botão direito do mouse em “Databases” sob o servidor desejado e selecione “Create &gt; Database”.</p>
+<p><img alt="Figura 41" src="_images/fig4_7.png" /></p>
+<p>Insira um nome para o banco de dados, conforme a figura abaixo, e clique em Save. Em nosso caso, criamos um banco de dados chamado “bdespacial”.</p>
+<p><img alt="Figura 41" src="_images/fig4_8.png" /></p>
+<p>No painel de navegação, clique no banco de dados criado (bdespacial) para expandir a sua árvore.</p>
+<p><img alt="Figura 41" src="_images/fig4_9.png" /></p>
+<p>É possível verificar que temos os nove elementos de um banco de dados PostgreSQL que vimos anteriormente no banco de dados “postgres”.</p>
+</div>
+<div class="section" id="execucao-de-consultas-sql">
+<h3>Execução de Consultas SQL:<a class="headerlink" href="#execucao-de-consultas-sql" title="Permalink to this heading">#</a></h3>
+<p>O pgAdmin 4 fornece um editor de SQL integrado para escrever e executar consultas. Para acessá-lo, clique com o botão direito do mouse em um banco de dados e selecione “Query Tool”, ou no botão destacado na figura a seguir.</p>
+<p><img alt="Figura 41" src="_images/fig4_10.png" /></p>
+<p>No editor que se abre, você pode escrever suas consultas SQL e executá-las clicando no botão de execução. É importante verificar se o editor abriu no banco de dados específico em que você está trabalhando, para garantir que as consultas sejam executadas no contexto correto e evitar alterações indesejadas em outros bancos de dados.</p>
+<p><img alt="Figura 41" src="_images/fig4_11.png" /></p>
+<p>Inicialmente, consulte qual é a versão do PostgreSQL que está instalada em sua máquina. Para tanto, escreva a consulta em SQL e clique no botão “Execute Script” (ou clique em F5 em seu teclado.</p>
+<p><img alt="Figura 41" src="_images/fig4_12.png" /></p>
+<p>A saída da consulta será exibida na parte inferior da área de trabalho, conforme figura abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_13.png" /></p>
+<p>O próximo passo é habilitar a extensão espacial postgis. Embora o PostGIS esteja instalado em seu computador, ele deve ser ativado para cada banco de dados no qual você deseja usar suas funcionalidades. Isso é feito através da execução de um comando SQL específico no editor do pgAdmin 4. A ativação permite que o banco de dados suporte dados espaciais.</p>
+<p><img alt="Figura 41" src="_images/fig4_14.png" /></p>
+<p>Para consultar qual é a versão do PostGIS instalada em seu computador, digite o código conforme figura abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_15.png" /></p>
+<p>Vamos verificar se a extensão PostGIS aparece em “Extensions” no painel de navegação. Para isso, é necessário atualizar o painel de navegação. Selecione “Extensions”, clique com o botão direito do mouse e selecione “Refresh”.</p>
+<p><img alt="Figura 41" src="_images/fig4_16.png" /></p>
+<p>A árvore de seu banco de dados será atualizada e será possível visualizar a extensão “PostsGIS” recém ativada.</p>
+<p><img alt="Figura 41" src="_images/fig4_17.png" /></p>
+</div>
+<div class="section" id="mais-sobre-esquemas-em-bancos-de-dados">
+<h3>Mais sobre esquemas em bancos de dados<a class="headerlink" href="#mais-sobre-esquemas-em-bancos-de-dados" title="Permalink to this heading">#</a></h3>
+<p>Como vimos anteriormente, os esquemas são como “pastas” dentro de um banco de dados que permitem organizar e gerenciar objetos de banco de dados, como tabelas, funções e views. Podemos visualizar os objetos que compõe um esquema na figura abaixo:</p>
+<p><img alt="Figura 41" src="_images/fig4_18.png" /></p>
+<p>No pgAdmin 4, um esquema organiza uma série de objetos de banco de dados, permitindo a gestão estruturada e a organização lógica dos dados. Aqui estão explicações breves para cada um dos tipos de objetos que você pode encontrar em um esquema no pgAdmin 4:</p>
+<ol class="arabic simple">
+<li><p>Aggregates: Funções que realizam uma operação em um conjunto de valores e retornam um único valor, como soma ou média.</p></li>
+<li><p>Collations: Define as regras para a comparação de strings, permitindo especificar idiomas e ordenações específicas para comparação de texto.</p></li>
+<li><p>Domains: Tipos de dados personalizados baseados em tipos existentes, com restrições adicionais aplicadas, como limites de valor ou verificações de validade.</p></li>
+<li><p>FTS Configurations (Configurações de Texto de Busca Completa): Configurações que definem como as buscas textuais completas são realizadas, incluindo quais dicionários de palavras são usados e como os tokens são processados.</p></li>
+<li><p>FTS Dictionaries (Dicionários de Texto de Busca Completa): Dicionários que definem como as palavras são normalizadas para buscas textuais completas, influenciando o reconhecimento de sinônimos, variantes de palavras e correção ortográfica.</p></li>
+<li><p>FTS Parsers (Analisadores de Texto de Busca Completa): Componentes que determinam como o texto é dividido em tokens ou palavras durante a indexação para buscas textuais completas.</p></li>
+<li><p>FTS Templates (Modelos de Texto de Busca Completa): Templates usados para definir a lógica de processamento de tokens nas configurações de busca textual completa.</p></li>
+<li><p>Foreign Tables (Tabelas Externas): Tabelas que representam dados armazenados fora do banco de dados atual, permitindo consultas a dados localizados em fontes de dados externas como se estivessem dentro do próprio PostgreSQL.</p></li>
+<li><p>Functions (Funções): Blocos de código que executam operações específicas e podem retornar valores. São usadas para encapsular lógicas complexas que podem ser reutilizadas em várias consultas ou operações.</p></li>
+<li><p>Materialized Views: Views que armazenam fisicamente o resultado de uma consulta no banco de dados para acesso rápido, ao contrário das views tradicionais que calculam os resultados dinamicamente.</p></li>
+<li><p>Operators (Operadores): Símbolos ou palavras-chave que especificam uma operação a ser executada entre dois ou mais operandos, como operações matemáticas ou de comparação.</p></li>
+<li><p>Procedures (Procedimentos): Semelhante às funções, são blocos de código que realizam operações, mas, ao contrário das funções, podem executar várias operações SQL e não necessariamente retornar um valor.</p></li>
+<li><p>Sequences (Sequências): Objetos que geram números sequenciais únicos, comumente usados para gerar identificadores únicos para novas linhas em tabelas.</p></li>
+<li><p>Tables (Tabelas): Estruturas que armazenam dados organizados em linhas e colunas, formando a espinha dorsal da maioria dos bancos de dados.</p></li>
+</ol>
+<p>Clique no símbolo “&gt;” em “Tables” para verificar as tabelas existentes no banco de dados.</p>
+<p><img alt="Figura 41" src="_images/fig4_19.png" /></p>
+<p>Quando habilitamos a extensão PostGIS, automaticamente é criada a tabela <code class="docutils literal notranslate"><span class="pre">spatial_ref_sys</span></code>. Ela é uma componente essencial em bancos de dados que utilizam o PostGIS. Essa tabela armazena informações sobre os Sistemas de Referência Espacial (Spatial Reference Systems - SRS), que são cruciais para trabalhar com dados geoespaciais. Cada sistema de referência espacial é identificado por um SRID (Spatial Reference IDentifier), um identificador único que define a projeção, o datum, e outras informações de transformação necessárias para interpretar corretamente as coordenadas espaciais. Na figura abaixo temos uma visualização da tabela spatial_ref_sys.</p>
+<p><img alt="Figura 41" src="_images/fig4_20.png" /></p>
+<ol class="arabic simple" start="15">
+<li><p>Trigger Functions (Funções de Gatilho): Funções especiais associadas a triggers, que são automaticamente invocadas quando eventos específicos ocorrem em uma tabela, como inserções, atualizações ou exclusões.</p></li>
+<li><p>Types (Tipos): Define novos tipos de dados que podem ser usados para colunas de tabela, argumentos de função ou resultados de consulta, aumentando a flexibilidade e a precisão no manuseio de dados.</p></li>
+<li><p>Views: Representações virtuais de resultados de consultas SQL, que podem ser usadas como se fossem tabelas, mas não armazenam dados fisicamente.</p></li>
+</ol>
+<p>Clique em “&gt;” ao lado de Views. Quando habilitamos a extensão PostGIS, automaticamente são criadas duas views, “geography_columns” e “geometry_columns”, conforme figura abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_21.png" /></p>
+<p>As visões <code class="docutils literal notranslate"><span class="pre">geography_columns</span></code> e <code class="docutils literal notranslate"><span class="pre">geometry_columns</span></code> são metadados fornecidos pelo PostGIS para facilitar o acesso a informações sobre colunas que armazenam dados geográficos e geométricos em um banco de dados PostgreSQL. Elas desempenham um papel importante na organização e no entendimento da estrutura de dados espaciais.
+A visão <code class="docutils literal notranslate"><span class="pre">geography_columns</span></code> lista todas as colunas do tipo <code class="docutils literal notranslate"><span class="pre">geography</span></code> em todas as tabelas do banco de dados. Para cada coluna <code class="docutils literal notranslate"><span class="pre">geography</span></code>, esta visão mostra informações como o nome da tabela, o nome da coluna, o tipo de dados espaciais (ponto, linha, polígono, etc.), e a dimensionalidade (2D, 3D, etc.).</p>
+<p><img alt="Figura 41" src="_images/fig4_22.png" /></p>
+<p>Já a visão <code class="docutils literal notranslate"><span class="pre">geometry_columns</span></code> fornece detalhes sobre as colunas do tipo <code class="docutils literal notranslate"><span class="pre">geometry</span></code> em todas as tabelas do banco de dados. Similar à <code class="docutils literal notranslate"><span class="pre">geography_columns</span></code>, esta visão inclui o nome da tabela, o nome da coluna, o tipo de dados geométricos (como ponto, linha, polígono), a dimensionalidade e, adicionalmente, o SRID (Spatial Reference System Identifier).</p>
+</div>
+</div>
+<div class="section" id="criando-geometrias-com-wkt">
+<h2>4.2 Criando geometrias com WKT<a class="headerlink" href="#criando-geometrias-com-wkt" title="Permalink to this heading">#</a></h2>
+<p>A criação de geometrias no PostGIS geralmente é realizada através da representação textual de tipos de dados espaciais, utilizando padrões bem estabelecidos, como o Well-Known Text (WKT) e suas contrapartes binárias, o Well-Known Binary (WKB). Ambos são formatos padronizados para representar geometrias, como pontos, linhas e polígonos, e são amplamente utilizados para a interoperabilidade entre sistemas de informação geográfica (GIS). Além do WKT, o PostGIS também suporta o formato GeoJSON e outros padrões OGC para trabalhar com dados espaciais.</p>
+<p><strong>Well-Known Text (WKT)</strong></p>
+<p>Well-Known Text (WKT) é um padrão de notação textual utilizado para representar geometrias espaciais em sistemas de informações geográficas (SIG). Ele é amplamente utilizado para trocar e armazenar informações geográficas devido à sua legibilidade tanto por humanos quanto por máquinas.
+Abaixo, exploraremos exemplos de WKT para diferentes tipos de geometrias espaciais: ponto, linha e polígono, oferecendo uma compreensão mais detalhada de como cada tipo de geometria é representada.
+Todo o código utilizado está disponível no Moodle, na semana 4. Você pode baixá-lo e abrir utilizando o bloco de notas ou outro programa de sua preferência.</p>
+<p>WKT de um ponto:</p>
+<p>POINT(30 10)</p>
+<p>Na notação POINT(30 10), POINT é um construtor que cria um objeto geométrico ponto a partir de um par de coordenadas. Os números entre parênteses, neste caso, “30” e “10”, especificam as coordenadas cartesianas ou geográficas desse ponto. O primeiro número, “30”, é a coordenada X, que pode representar a longitude em um contexto geográfico. O segundo número, “10”, é a coordenada Y, que pode representar a latitude.</p>
+<p>WKT de uma linha:</p>
+<p>LINESTRING(30 10, 10 30, 40 40)</p>
+<p>Aqui, estamos definindo um objeto geométrico diferente: uma linha que conecta múltiplos pontos. Cada par de coordenadas dentro dos parênteses define um ponto, e a linha conecta esses pontos na ordem dada, começando no ponto (30, 10), passando pelo ponto (10, 30), e terminando no ponto (40, 40). A linha criada com esses pontos é apresentada abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_23.png" /></p>
+<p>WKT de um polígono simples:</p>
+<p>POLYGON((30 10, 40 40, 20 40, 10 20, 30 10))</p>
+<p>Na representação ‘POLYGON((30 10, 40 40, 20 40, 10 20, 30 10))’, “POLYGON” especifica o tipo de objeto geométrico, neste caso, um polígono.
+Os pares de números entre parênteses representam as coordenadas dos vértices que delimitam o polígono no espaço.
+Cada par de coordenadas determina um ponto, com o primeiro número sendo a coordenada X (longitude) e o segundo número a coordenada Y (latitude). O polígono é formado conectando-se os pontos na ordem especificada, criando lados que delimitam uma área fechada.
+No exemplo dado, os pontos são (30 10), (40 40), (20 40), (10 20), e retorna ao ponto inicial (30 10) para fechar o polígono. O polígono resultante é apresentado na figura a seguir.</p>
+<p><img alt="Figura 41" src="_images/fig4_24.png" /></p>
+<p>WKT de um polígono com furo:</p>
+<p>‘POLYGON((30 10, 40 40, 20 40, 10 20, 30 10), (20 20, 30 20, 30 31, 20 31, 20 20))’</p>
+<p>Na representação ‘POLYGON((30 10, 40 40, 20 40, 10 20, 30 10), (20 20, 30 20, 30 31, 20 31, 20 20))’, estamos lidando com um polígono que possui um “furo” ou uma área interna que não faz parte do polígono. “POLYGON” indica que o tipo de objeto geométrico é um polígono. As coordenadas dentro do primeiro par de parênteses representam os vértices do polígono externo, definindo o limite exterior da forma, enquanto as coordenadas dentro do segundo par de parênteses definem os vértices de um polígono interno, ou seja, o “furo”.
+Os pares de números representam as coordenadas dos vértices no espaço, com o primeiro número de cada par sendo a coordenada X (longitude) e o segundo número a coordenada Y (latitude). No exemplo, o polígono externo é definido pelos pontos (30 10), (40 40), (20 40), (10 20), e volta ao ponto inicial (30 10) para fechar a forma. Em seguida, o polígono interno (o furo) é delineado pelos pontos (20 20), (30 20), (30 31), (20 31), e retorna ao ponto inicial (20 20) para fechar a forma interna. O polígono resultante é apresentado na figura a seguir.</p>
+<p><img alt="Figura 41" src="_images/fig4_25.png" /></p>
+<p>Essa construção permite a representação de áreas mais complexas, onde não apenas a borda externa, mas também uma ou mais áreas internas excluídas são definidas, permitindo uma descrição geométrica precisa de formas que possuem recortes ou espaços vazios internos.</p>
+<p><strong>Well-Known Binary (WKB)</strong></p>
+<p>O Well-Known Binary (WKB) é um formato binário padronizado utilizado para representar geometrias de maneira compacta e eficiente. Desenvolvido como um complemento ao Well-Known Text (WKT), o WKB oferece uma maneira de serializar dados geométricos que é otimizada para armazenamento e processamento por computadores. Enquanto o WKT é legível por humanos e fácil de editar manualmente, o WKB é projetado para ser processado por máquinas, permitindo uma manipulação mais rápida e eficiente dos dados espaciais.
+Devido à sua eficiência e compactação, o WKB é amplamente utilizado em bancos de dados espaciais e aplicações que requerem manipulação intensiva de dados geoespaciais. A escolha entre WKT e WKB geralmente depende do contexto de uso: WKT é preferido para legibilidade e facilidade de edição, enquanto WKB é escolhido para eficiência em armazenamento e processamento.</p>
+<div class="section" id="criando-geometrias-com-wkt-no-postgis">
+<h3>4.2.1 Criando Geometrias com WKT no PostGIS<a class="headerlink" href="#criando-geometrias-com-wkt-no-postgis" title="Permalink to this heading">#</a></h3>
+<p>Para começar a criar geometrias a partir de WKT no PostGIS, podemos utilizar as funções <code class="docutils literal notranslate"><span class="pre">ST_GeomFromText()</span></code> ou <code class="docutils literal notranslate"><span class="pre">ST_GeographyFromText</span></code>. Essas funções aceitam uma string WKT como argumento e retornam uma geometria correspondente. Além de usar WKT, você também pode criar essas geometrias usando funções específicas para construir geometrias a partir de arrays de pontos ou linhas, como ST_Multi, ST_Collect, ou ST_Union, dependendo das suas necessidades específicas e da estrutura dos seus dados.</p>
+<p><strong>ST_GeomFromText</strong></p>
+<p>O ST_GeomFromText é uma função do PostGIS usada para converter uma string WKT em uma geometria PostGIS correspondente. Essa função é fundamental para inserir e operar com dados espaciais representados em formato de texto. A sintaxe básica desta função é:</p>
+<p>ST_GeomFromText(text WKT, [integer srid]);</p>
+<p>Vamos criar geometrias utilizando a função ST_GeomFromText. Abra o pgAdmin4 e conecte ao banco de dados que havíamos criado na seção anterior, o “bdespacial”.</p>
+<p><img alt="Figura 41" src="_images/fig4_26.png" /></p>
+<p>Selecione o banco de dados “bdespacial” e abra a ferramenta de consulta (Query Tool).</p>
+<p><img alt="Figura 41" src="_images/fig4_27.png" /></p>
+<p>A sua área de trabalho no pgAdmin deve estar como apresentado na figura abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_28.png" /></p>
+<p>Na área de consulta, vamos criar consultas para a criação de diversos tipos geométricos.</p>
+<p><img alt="Figura 41" src="_images/fig4_29.png" /></p>
+<p><em>Ponto (POINT)</em></p>
+<p>Digite a consulta conforme a imagem abaixo. Em seguida, clique em “Execute Script” (ou pressione F5). A saída da consulta estará na parte inferior da tela.</p>
+<p><img alt="Figura 41" src="_images/fig4_30.png" /></p>
+<p>A sequência de números criada acima, em st_geomfromtext, é a codificação binária do ponto geométrico que especificamos, armazenado em um formato que o PostGIS pode interpretar e utilizar para operações espaciais.</p>
+<p>Esse formato binário é conhecido como “EWKB” (Extended Well-Known Binary), que é uma extensão do formato padrão WKB (Well-Known Binary). O EWKB adiciona suporte para SRID (Spatial Reference System Identifier) e outros bits de informação que não estão presentes no WKB padrão. Essa representação binária é utilizada internamente pelo PostGIS para armazenar e operar com eficiência sobre dados geométricos.</p>
+<p>Na consulta:</p>
+<p>SELECT: Este é o comando SQL básico usado para recuperar dados de um banco de dados. Neste contexto, ele é usado para executar a função e retornar seu resultado.</p>
+<p>ST_GeomFromText: Converte uma string de texto Well-Known Text (WKT) em um objeto geométrico.</p>
+<p>‘POINT(30 10)’: Esta é a string WKT passada como argumento para a função ST_GeomFromText. Ela descreve um objeto geométrico do tipo ponto.</p>
+<p>Para visualizar o ponto criado no próprio pgAdmin, vamos utilizar a funcionalidade “Geometry Viewer”, conforme a figura a seguir.</p>
+<p><img alt="Figura 41" src="_images/fig4_31.png" /></p>
+<p>Vamos criar pontos tridimensionais. Na consulta abaixo, o terceiro valor entre parênteses representa a coordenada Z do ponto.</p>
+<p><img alt="Figura 41" src="_images/fig4_32.png" /></p>
+<p>A funcionalidade “Geometry Viewer” não suporta visualização de geometrias tridimensionais.</p>
+<p><img alt="Figura 41" src="_images/fig4_33.png" /></p>
+<p><em>Linha (LINESTRING)</em></p>
+<p>Digite a consulta conforme a imagem abaixo que gera uma linha como saída. Em seguida, clique em “Execute Script” (ou pressione F5). A saída da consulta estará na parte inferior da tela.</p>
+<p><img alt="Figura 41" src="_images/fig4_34.png" /></p>
+<p>No exemplo anterior criamos uma linha com dois pontos. O exemplo a seguir cria uma linha a partir de três pontos.</p>
+<p><img alt="Figura 41" src="_images/fig4_35.png" /></p>
+<p><em>Polígono (POLYGON)</em></p>
+<p>Para criar um polígono simples podemos utilizar a seguinte consulta:</p>
+<p><img alt="Figura 41" src="_images/fig4_36.png" /></p>
+<p>Para criar um polígono com furo, a sintaxe é:</p>
+<p><img alt="Figura 41" src="_images/fig4_37.png" /></p>
+<p>Neste exemplo, o primeiro conjunto de coordenadas define o contorno externo do polígono, enquanto o segundo conjunto define a geometria do furo.</p>
+<p><em>CircularString para Linestring</em></p>
+<p>No PostGIS, é possível também criar circunferências e arcos. No exemplo abaixo criamos uma circunferência.</p>
+<p><img alt="Figura 41" src="_images/fig4_38.png" /></p>
+<p>Para criar geometrias mais complexas, como multipoint, multilinestring ou multipolygon, utilizamos consultas similares às apresentadas anteriormente.</p>
+<p><em>Multiponto (MULTIPOINT)</em></p>
+<p>Um Multiponto (MULTIPOINT) é uma coleção de vários pontos, que podem ser criados conforme a figura abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_39.png" /></p>
+<p>Este comando agrupa vários pontos individuais em um único objeto.</p>
+<p>Qual a diferença entre definir um dado como POINT ou MULTIPOINT?</p>
+<p>A diferença fundamental entre definir um dado como sendo do tipo POINT e do tipo MULTIPOINT reside na quantidade de localizações que cada tipo pode representar dentro de uma única geometria. Ambos são utilizados para armazenar e gerenciar dados espaciais, mas servem a propósitos distintos com base na complexidade dos dados que se deseja modelar.
+Um <code class="docutils literal notranslate"><span class="pre">POINT</span></code> representa uma única localização no espaço. Se você tem vários pontos e cada um tem seus próprios atributos ou representa uma entidade distinta, você trataria cada um como um <code class="docutils literal notranslate"><span class="pre">POINT</span></code> separado. Cada ponto pode ter seus próprios atributos associados, como nome, tipo, ou qualquer outra característica relevante para o dado.
+Um <code class="docutils literal notranslate"><span class="pre">MULTIPOINT</span></code>, por outro lado, é usado para representar múltiplas localizações como uma única entidade geométrica. Isso não implica necessariamente que todos os pontos dentro de um <code class="docutils literal notranslate"><span class="pre">MULTIPOINT</span></code> tenham que compartilhar os mesmos atributos. Em vez disso, significa que você está agrupando vários pontos em uma única entidade por razões de conveniência ou análise. Por exemplo, se você está representando um conjunto de árvores de uma mesma espécie dentro de um parque como uma única entidade, mas não precisa diferenciar entre cada árvore individualmente.
+A decisão entre definir uma entidade no banco de dados como <code class="docutils literal notranslate"><span class="pre">POINT</span></code> ou <code class="docutils literal notranslate"><span class="pre">MULTIPOINT</span></code> está mais relacionada à modelagem e a análise geométrica dos dados do que à uniformidade de seus atributos. Isto vale também para LINESTRING/MULTILINESTRING E POLYGON/MULTIPOLYGON.</p>
+<p><em>Multilinha (MULTILINESTRING)</em></p>
+<p>Um Multilinha (MULTILINESTRING) é uma coleção de várias linhas, permitindo armazenar múltiplas linestrings como uma única entidade geométrica. Digite o código conforme a figura abaixo para criar uma MULTILINESTRING.</p>
+<p><img alt="Figura 41" src="_images/fig4_40.png" /></p>
+<p><em>Multipolígono (MULTIPOLYGON)</em></p>
+<p>Um Multipolígono (MULTIPOLYGON) é uma coleção de vários polígonos, útil para representar múltiplas áreas distintas em uma geometria única:</p>
+<p><img alt="Figura 41" src="_images/fig4_41.png" /></p>
+<p><em>Coleção de Geometrias (GEOMETRYCOLLECTION)</em></p>
+<p>Uma <strong>Coleção de Geometrias (GEOMETRYCOLLECTION)</strong> permite agrupar diferentes tipos de geometrias (pontos, linhas, polígonos) em uma única entidade no banco de dados. Na figura abaixo apresentamos um exemplo de GEOMETRYCOLLECTION.</p>
+<p><img alt="Figura 41" src="_images/fig4_42.png" /></p>
+<p><strong>ST_GeographyFromText</strong></p>
+<p>A função ST_GeographyFromText no PostGIS é usada para converter uma representação textual de uma geometria, conhecida como Well-Known Text (WKT), em um tipo de dado GEOGRAPHY. Como vimos no capítulo 3, a diferença principal entre os tipos GEOMETRY e GEOGRAPHY é que enquanto GEOMETRY assume um plano cartesiano, o tipo GEOGRAPHY considera a curvatura terrestre.</p>
+<p>ST_GeographyFromText(text WKT, [integer srid]);</p>
+<p>Exemplo:</p>
+<p><img alt="Figura 41" src="_images/fig4_42.png" /></p>
+<p>Neste exemplo, a função está convertendo uma string WKT que representa um ponto (longitude e latitude de um local em Brasília) em um tipo Geography. Note que, diferente do Geometry, ao trabalhar com Geography é comum (e recomendado) incluir o SRID. Nesse exemplo, especificamos o SRID como 4674, que representa o sistema SIRGAS2000.</p>
+<p><img alt="Figura 41" src="_images/fig4_43.png" /></p>
+<p>É importante destacar que enquanto a ST_GeomFromText pode ser usada sem especificar um SRID, e neste caso, ele assume o valor padrão 0, na ST_GeographyFromText,  espera-se que o SRID seja especificado para que os cálculos sejam realizados corretamente. Se o SRID não for especificado, o PostGIS assume o padrão 4326 para o tipo Geography.</p>
+</div>
+</div>
+<div class="section" id="verificando-a-validade-de-geometrias">
+<h2>4.3 Verificando a validade de geometrias<a class="headerlink" href="#verificando-a-validade-de-geometrias" title="Permalink to this heading">#</a></h2>
+<p>A verificação da validade de geometrias é uma etapa de grande relevância no trabalho com dados espaciais, especialmente quando esses dados são usados para análises complexas ou decisões críticas em sistemas de informações geográficas (SIG). Geometrias inválidas podem levar a erros de cálculo, falhas em consultas espaciais e dificuldades na visualização de dados.
+Para verificar a validade de uma geometria no PostGIS, a função <code class="docutils literal notranslate"><span class="pre">ST_IsValid</span></code> é frequentemente empregada. Esta função retorna <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> se a geometria for válida, de acordo com as regras do Open Geospatial Consortium (OGC), ou <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> se for inválida.
+Dado o polígono com furos representado na figura abaixo, vamos consultar a sua validade.</p>
+<p><img alt="Figura 41" src="_images/fig4_44.png" /></p>
+<p>Para verificar sua validade, utilizamos a função ST_IsValid.</p>
+<p><img alt="Figura 41" src="_images/fig4_45.png" /></p>
+<p>Podemos verificar que a função retornou “true”, indicando que a geometria é válida.</p>
+<p>Agora vamos consultar a validade de outra geometria, definida de acordo com as coordenadas apresentadas na figura abaixo:</p>
+<p><img alt="Figura 41" src="_images/fig4_46.png" /></p>
+<p>Para verificar a validade dessa geometria:</p>
+<p><img alt="Figura 41" src="_images/fig4_47.png" /></p>
+<p>A consulta retornou “false”, indicando que a geometria não é válida.</p>
+<p>Para entender o motivo da invalidação da geometria, aplicamos a consulta conforme figura abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_48.png" /></p>
+<p>O resultado <code class="docutils literal notranslate"><span class="pre">Self-intersection[18</span> <span class="pre">16]</span></code> indica que a geometria do polígono é considerada inválida devido a uma auto-interseção em um ponto cujas coordenadas são aproximadamente (18, 16). Isso significa que uma das linhas do polígono cruza outra linha ou si mesma em algum lugar, o que não é permitido em uma geometria válida de polígono segundo as regras definidas pelo Open Geospatial Consortium (OGC).</p>
+</div>
+<div class="section" id="criando-e-inserindo-dados-do-tipo-geometry-em-tabelas">
+<h2>4.4 Criando e inserindo dados do tipo Geometry em tabelas<a class="headerlink" href="#criando-e-inserindo-dados-do-tipo-geometry-em-tabelas" title="Permalink to this heading">#</a></h2>
+<p>No PostGIS, criar tabelas com colunas do tipo Geometry é um processo bastante direto. As etapas básicas para criar uma tabela com uma coluna do tipo Geometry são:</p>
+<p>Criar a tabela: Use o comando CREATE TABLE para criar uma tabela;
+Adicionar a coluna que armazenará a geometria: Utilize a função AddGeometryColumn ou simplesmente declare uma coluna do tipo Geometry dentro do comando CREATE TABLE;
+Definir o tipo de geometria e SRID: Durante a criação da coluna de geometria, você pode especificar o tipo de geometria (ponto, linha, polígono, etc.) e o SRID (Spatial Reference System Identifier), que define o sistema de referência espacial para a coluna que armazenará as geometrias. No exemplo que apresentaremos a seguir, não especificaremos o SRID das geometrias.</p>
+<p>Inicialmente, vamos criar uma tabela denominada <code class="docutils literal notranslate"><span class="pre">geometrias</span></code> para armazenar nossos dados espaciais. Esta tabela incluirá um <code class="docutils literal notranslate"><span class="pre">id</span></code> como chave primária, um campo <code class="docutils literal notranslate"><span class="pre">nome</span></code> para descrever a geometria e um campo <code class="docutils literal notranslate"><span class="pre">geom</span></code>, do tipo <code class="docutils literal notranslate"><span class="pre">GEOMETRY</span></code>, para armazenar a geometria propriamente dita.
+Escreva a consulta de acordo com a figura abaixo. Em seguida, clique em “Execute Script” ou tecle F5.</p>
+<p><img alt="Figura 41" src="_images/fig4_49.png" /></p>
+<p>Podemos verificar que a tabela foi criada com sucesso, em 174 milissegundos.</p>
+<p>Para visualizar a nova tabela criada no Painel de Navegação, selecione “Table”, clique com o botão esquerdo do mouse e selecione “Refresh”.</p>
+<p><img alt="Figura 41" src="_images/fig4_50.png" /></p>
+<p>O Painel de navegação será atualizado e é inserida a tabela “geometrias” na visualização.</p>
+<p>Clique no nome da tabela, com o botão direito do mouse, para verificar os componentes da tabela, que devem estar conforme a figura abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_51.png" /></p>
+<p>Selecionando “Columns”, é possível visualizar os atributos da tabela.</p>
+<p><img alt="Figura 41" src="_images/fig4_52.png" /></p>
+<p>A tabela “geometrias” tem os atributos “id”, “nome” e “geom”, conforme definido na consulta inicial para a criação da tabela.</p>
+<p><strong>Inserindo Dados na tabela “geometrias”</strong></p>
+<p>Após a criação da tabela, a próxima etapa consiste na inserção de dados. Teremos dados dos seguintes tipos geométricos: ponto, linha, polígono, multiponto, multilinha, multipolígono e coleção de geometrias. Para fins didáticos, os dados serão inseridos um a um. Em uma situação real, provavelmente inseriríamos todos os dados em uma só consulta.
+Para inserir o primeiro dado, do tipo POINT, digite a consulta e execute o script, confirmando que foi executado com sucesso, conforme a figura abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_53.png" /></p>
+<p>Você pode converter a geometria criada de sua representação binária para texto legível (WKT, Well-Known Text), utilizando a função ST_AsText.</p>
+<p><img alt="Figura 41" src="_images/fig4_53.png" /></p>
+<p>Essa opção de visualização é mais simples e direta de entender do que a representação binária.</p>
+<p>Para consultar todo o conteúdo da tabela, executamos a consulta apresentada na figura a seguir.</p>
+<p><img alt="Figura 41" src="_images/fig4_54.png" /></p>
+<p>Para visualizar a geometria inserida no banco de dados, utilizamos o Geometry Viewer.</p>
+<p><img alt="Figura 41" src="_images/fig4_55.png" /></p>
+<p>Após clicar no Geometry Viewer, a geometria será apresentada na parte inferior da área de trabalho.</p>
+<p><img alt="Figura 41" src="_images/fig4_56.png" /></p>
+<p>A segunda geometria que iremos inserir é uma linha.</p>
+<p><img alt="Figura 41" src="_images/fig4_57.png" /></p>
+<p>Para visualizar as geometrias armazenadas no banco de dados em formato WKT, aplicamos a consulta conforme a figura abaixo.</p>
+<p><img alt="Figura 41" src="_images/fig4_58.png" /></p>
+<p>Para consultar todo o conteúdo da tabela, executamos a consulta apresentada na figura a seguir.</p>
+<p><img alt="Figura 41" src="_images/fig4_59.png" /></p>
+<p>Podemos verificar que temos tanto o ponto quanto a linha. Para visualizar as suas geometrias:</p>
+<p><img alt="Figura 41" src="_images/fig4_60.png" /></p>
+<p>A seguir, vamos inserir um polígono em nosso banco de dados e visualizar as geometrias armazenadas como WKT.</p>
+<p><img alt="Figura 41" src="_images/fig4_61.png" /></p>
+<p>Em seguida, visualizamos as geometrias como imagem.</p>
+<p><img alt="Figura 41" src="_images/fig4_62.png" /></p>
+<p>Vamos inserir um polígono com furos e realizar o mesmo procedimento de visualização que adotamos para as geometrias anteriores.</p>
+<p><img alt="Figura 41" src="_images/fig4_63.png" /></p>
+<p><img alt="Figura 41" src="_images/fig4_64.png" /></p>
+<p>Após a inserção de geometrias simples, vamos inserir geometrias mais complexas, como multipoint, multilinestring e multipolygon. Para inserir um multipoint:</p>
+<p><img alt="Figura 41" src="_images/fig4_65.png" /></p>
+<p><img alt="Figura 41" src="_images/fig4_66.png" /></p>
+<p>Para inserir uma multilinestring:</p>
+<p><img alt="Figura 41" src="_images/fig4_67.png" /></p>
+<p>Para visualizar todo o conjunto de geometrias:</p>
+<p><img alt="Figura 41" src="_images/fig4_68.png" /></p>
+<p>Para inserir um multipolygon:</p>
+<p><img alt="Figura 41" src="_images/fig4_69.png" /></p>
+<p>Para visualizar todo o conjunto de geometrias:</p>
+<p><img alt="Figura 41" src="_images/fig4_70.png" /></p>
+<p>Por fim, vamos inserir uma Geometry Collection composta por um ponto e uma linha apenas.</p>
+<p><img alt="Figura 41" src="_images/fig4_71.png" /></p>
+<p>Para visualizar o conjunto final, com todas as geometrias:</p>
+<p><img alt="Figura 41" src="_images/fig4_72.png" /></p>
+<p><img alt="Figura 41" src="_images/fig4_73.png" /></p>
+<div class="section" id="salvando-o-codigo-em-sql">
+<h3>Salvando o código em .sql.<a class="headerlink" href="#salvando-o-codigo-em-sql" title="Permalink to this heading">#</a></h3>
+<p>Para salvar o seu código, clique no ícone “Save File” conforme indicado na imagem abaixo e defina o local para salvar o arquivo. O arquivo será salvo em formato .sql.</p>
+<p><img alt="Figura 41" src="_images/fig4_74.png" /></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="capitulo3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3. FUNDAMENTOS E PRÁTICAS EM BANCOS DE DADOS ESPACIAIS</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="referencias.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Referências Bibliográficas</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducao-ao-pgadmin4">4.1 Introdução ao pgAdmin4</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criacao-de-bancos-de-dados">Criação de Bancos de Dados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execucao-de-consultas-sql">Execução de Consultas SQL:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mais-sobre-esquemas-em-bancos-de-dados">Mais sobre esquemas em bancos de dados</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-geometrias-com-wkt">4.2 Criando geometrias com WKT</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-geometrias-com-wkt-no-postgis">4.2.1 Criando Geometrias com WKT no PostGIS</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificando-a-validade-de-geometrias">4.3 Verificando a validade de geometrias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#criando-e-inserindo-dados-do-tipo-geometry-em-tabelas">4.4 Criando e inserindo dados do tipo Geometry em tabelas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#salvando-o-codigo-em-sql">Salvando o código em .sql.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexandro Gularte Schafer
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
