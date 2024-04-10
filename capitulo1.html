@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -396,7 +397,6 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integridade-e-normalizacao-de-dados">1.7 Integridade e normalização de dados</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-de-gerenciamento-de-banco-de-dados">1.8 Sistemas de gerenciamento de banco de dados</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#os-sistemas-de-gerenciamento-de-bancos-de-dados-relacionais-sgbdrs-mais-populares-atualmente-incluem">Os Sistemas de Gerenciamento de Bancos de Dados Relacionais (SGBDRs) mais populares atualmente incluem:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-sgbd-postgresql">1.8.1 O SGBD PostgreSQL</a></li>
 </ul>
 </li>
@@ -622,15 +622,15 @@ document.write(`
 <ul class="simple">
 <li><p><em>JSON (JavaScript Object Notation):</em> Muito usado em APIs web e configurações, o JSON organiza dados em um formato legível por humanos e máquinas, com estruturas de chave-valor que podem ser aninhadas.</p></li>
 </ul>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
-  &quot;nome&quot;: &quot;João Silva&quot;,
-  &quot;idade&quot;: 30,
-   endereço&quot;: {
-    &quot;rua&quot;: &quot;Rua das Flores&quot;,
-    &quot;cidade&quot;: &quot;São Paulo&quot;,
-    &quot;CEP&quot;: &quot;01002-000&quot;
-  }
-}
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;João Silva&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;idade&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;endereço&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;rua&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rua das Flores&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;cidade&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;São Paulo&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CEP&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01002-000&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -805,8 +805,7 @@ A distinção entre dados semi-estruturados e não estruturados reside na exist�
 <li><p><strong>Integridade de Dados e Conformidade:</strong> Garantem que os dados atendam a certos critérios de qualidade e conformidade através de regras de integridade referencial e outras restrições.</p></li>
 <li><p><strong>Metadados:</strong> Mantém informação sobre a estrutura do banco de dados, tipos de dados, restrições e relacionamentos entre os dados.</p></li>
 </ul>
-<div class="section" id="os-sistemas-de-gerenciamento-de-bancos-de-dados-relacionais-sgbdrs-mais-populares-atualmente-incluem">
-<h3>Os Sistemas de Gerenciamento de Bancos de Dados Relacionais (SGBDRs) mais populares atualmente incluem:<a class="headerlink" href="#os-sistemas-de-gerenciamento-de-bancos-de-dados-relacionais-sgbdrs-mais-populares-atualmente-incluem" title="Permalink to this heading">#</a></h3>
+<p>Os Sistemas de Gerenciamento de Bancos de Dados Relacionais (SGBDRs) mais populares atualmente incluem:</p>
 <ul class="simple">
 <li><p><strong>Oracle Database:</strong> Altamente reconhecido em empresas de grande porte, oferece recursos extensivos para computação em nuvem, armazenamento de dados, e várias outras funcionalidades de alto desempenho.</p></li>
 <li><p><strong>MySQL:</strong> Muito popular no desenvolvimento de aplicações web, é conhecido pela sua facilidade de uso e eficiência. É uma escolha padrão em muitos ambientes de hospedagem web.</p></li>
@@ -816,7 +815,6 @@ A distinção entre dados semi-estruturados e não estruturados reside na exist�
 <li><p><strong>IBM Db2:</strong> Frequentemente utilizado em grandes corporações e sistemas financeiros para processamento de transações de alta velocidade e data warehousing.</p></li>
 </ul>
 <p>A escolha de um SGBD pode variar de acordo com as necessidades específicas de uma organização ou projeto, como requisitos de desempenho, confiabilidade, escalabilidade e suporte da comunidade.</p>
-</div>
 <div class="section" id="o-sgbd-postgresql">
 <h3>1.8.1 O SGBD PostgreSQL<a class="headerlink" href="#o-sgbd-postgresql" title="Permalink to this heading">#</a></h3>
 <p>Em nosso curso, iremos utilizar o <strong>PostgreSQL</strong> e sua extensão espacial, o <strong>PostGIS</strong>. O PostgreSQL é um sistema de banco de dados relacional de código aberto, que oferece suporte tanto a consultas SQL (relacionais) quanto a JSON (não relacionais). Com mais de 20 anos de desenvolvimento pela comunidade de código aberto, o PostgreSQL destaca-se pela sua estabilidade. Ele é amplamente utilizado como banco de dados principal para diversas aplicações web, além de aplicações móveis e de análises, consolidando-se como uma escolha robusta e versátil no gerenciamento de dados (POSTGRESQL, 2023).</p>
@@ -918,7 +916,6 @@ A distinção entre dados semi-estruturados e não estruturados reside na exist�
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integridade-e-normalizacao-de-dados">1.7 Integridade e normalização de dados</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-de-gerenciamento-de-banco-de-dados">1.8 Sistemas de gerenciamento de banco de dados</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#os-sistemas-de-gerenciamento-de-bancos-de-dados-relacionais-sgbdrs-mais-populares-atualmente-incluem">Os Sistemas de Gerenciamento de Bancos de Dados Relacionais (SGBDRs) mais populares atualmente incluem:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#o-sgbd-postgresql">1.8.1 O SGBD PostgreSQL</a></li>
 </ul>
 </li>

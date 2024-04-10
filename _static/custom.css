@@ -2,4 +2,6 @@ p {
   line-height: 1.5; /* Ajusta o espaçamento entre linhas para 1.5 */
   text-align: justify; /* Justifica o texto */
   text-justify: inter-word; /* Melhora a justificação para espaçamento entre palavras */
+  text-indent: 40px; /* Adiciona uma indentação no início de cada parágrafo */
 }
+

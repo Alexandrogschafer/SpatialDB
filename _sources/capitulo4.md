@@ -18,7 +18,7 @@ Neste capítulo, apresentamos uma introdução sobre a manipulação de dados es
 
 Embora possamos utilizar o PostrgeSQL e o PostGIS com o Python no ambiente do Google Colab, optamos por utilizar ferramentas que proporcionam uma melhor visualização da estrutura do banco de dados e da manipulação dos dados geoespaciais e alfanuméricos, o que é importante quando se está dando os primeiros passos nessa área. 
 
-Para que seja possível realizar as atividades do capítulo, você deve instalar em seu computador o PostgreSQL, o PostGIS e o Pgadmin4, além do Qgis.
+Para que seja possível realizar as atividades do capítulo, você deve instalar em seu computador o PostgreSQL, o PostGIS e o Pgadmin4, além do Qgis. No ambiente virtual de nossa disciplina, no Moodle, temos o link para um vídeo sobre a instalação desses softwares e extensões.
 
 Inicialmente, vamos explorar as principais ferramentas do pgAdmin 4, uma interface gráfica de usuário destinada à administração do PostgreSQL. O pgAdmin 4 proporciona uma plataforma intuitiva para a execução de tarefas administrativas e consultas em bancos de dados.
 
@@ -34,9 +34,7 @@ Por fim, concluiremos o capítulo com a integração entre o PostGIS e o QGIS, o
 
 O pgAdmin 4 é uma ferramenta de administração e desenvolvimento de código aberto para PostgreSQL. Como a interface gráfica de usuário (GUI) oficial do PostgreSQL, ele permite que os usuários interajam com o banco de dados PostgreSQL através de uma interface web ou desktop, facilitando a execução das tarefas inerentes ao trabalho em banco de dados.
 
-Para começar, você precisará instalar o pgAdmin 4 no seu sistema. Visite o site oficial do pgAdmin *(https://www.pgadmin.org/download/)* e escolha a versão adequada para o seu sistema operacional. Siga as instruções de instalação fornecidas no site para completar a instalação.
-
-Após instalar o pgAdmin4, abra o aplicativo e siga as etapas elencadas a seguir. A figura abaixo apresenta a tela inicial do pgAdmin.
+Abra o aplicativo e siga as etapas elencadas a seguir. A figura abaixo apresenta a tela inicial do pgAdmin.
 
 ![Figura 41](images/fig4_1.png)
 

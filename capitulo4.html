@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -401,7 +402,7 @@ document.write(`
 <h1>4. TRABALHANDO COM DADOS ESPACIAIS NO POSTGIS<a class="headerlink" href="#trabalhando-com-dados-espaciais-no-postgis" title="Permalink to this heading">#</a></h1>
 <p>Neste capítulo, apresentamos uma introdução sobre a manipulação de dados espaciais utilizando o PostGIS, a extensão do sistema de gerenciamento de banco de dados PostgreSQL que habilita o suporte para objetos geográficos.</p>
 <p>Embora possamos utilizar o PostrgeSQL e o PostGIS com o Python no ambiente do Google Colab, optamos por utilizar ferramentas que proporcionam uma melhor visualização da estrutura do banco de dados e da manipulação dos dados geoespaciais e alfanuméricos, o que é importante quando se está dando os primeiros passos nessa área.</p>
-<p>Para que seja possível realizar as atividades do capítulo, você deve instalar em seu computador o PostgreSQL, o PostGIS e o Pgadmin4, além do Qgis.</p>
+<p>Para que seja possível realizar as atividades do capítulo, você deve instalar em seu computador o PostgreSQL, o PostGIS e o Pgadmin4, além do Qgis. No ambiente virtual de nossa disciplina, no Moodle, temos o link para um vídeo sobre a instalação desses softwares e extensões.</p>
 <p>Inicialmente, vamos explorar as principais ferramentas do pgAdmin 4, uma interface gráfica de usuário destinada à administração do PostgreSQL. O pgAdmin 4 proporciona uma plataforma intuitiva para a execução de tarefas administrativas e consultas em bancos de dados.</p>
 <p>Em seguida, criaremos geometrias utilizando a linguagem <code class="docutils literal notranslate"><span class="pre">Well-Known</span> <span class="pre">Text</span> <span class="pre">(WKT)</span></code>, um padrão textual para representação de formas geométricas. Apresentaremos a fundamentação para a criação de pontos, linhas, polígonos e outras geometrias básicas no contexto dos dados geoespaciais. Logo após, criaremos as tabelas no banco de dados para armazenar os dados do tipo geometry.</p>
 <p>Por fim, concluiremos o capítulo com a integração entre o PostGIS e o QGIS, o que facilita a visualização, a edição e a análise de dados geoespaciais. Trabalharemos no processo de configuração do banco de dados PostGIS no ambiente QGIS, bem como no procedimento para importação de shapefiles para o banco de dados diretamente a partir do QGIS.
@@ -411,8 +412,7 @@ document.write(`
 <h2>4.1 Introdução ao pgAdmin4<a class="headerlink" href="#introducao-ao-pgadmin4" title="Permalink to this heading">#</a></h2>
 <br>
 <p>O pgAdmin 4 é uma ferramenta de administração e desenvolvimento de código aberto para PostgreSQL. Como a interface gráfica de usuário (GUI) oficial do PostgreSQL, ele permite que os usuários interajam com o banco de dados PostgreSQL através de uma interface web ou desktop, facilitando a execução das tarefas inerentes ao trabalho em banco de dados.</p>
-<p>Para começar, você precisará instalar o pgAdmin 4 no seu sistema. Visite o site oficial do pgAdmin <em>(<a class="reference external" href="https://www.pgadmin.org/download/">https://www.pgadmin.org/download/</a>)</em> e escolha a versão adequada para o seu sistema operacional. Siga as instruções de instalação fornecidas no site para completar a instalação.</p>
-<p>Após instalar o pgAdmin4, abra o aplicativo e siga as etapas elencadas a seguir. A figura abaixo apresenta a tela inicial do pgAdmin.</p>
+<p>Abra o aplicativo e siga as etapas elencadas a seguir. A figura abaixo apresenta a tela inicial do pgAdmin.</p>
 <p><img alt="Figura 41" src="_images/fig4_1.png" /></p>
 <br>
 <p>Com o pgAdmin 4 aberto, conecte-se ao seu servidor PostgreSQL clicando no <code class="docutils literal notranslate"><span class="pre">Painel</span> <span class="pre">de</span> <span class="pre">Navegação</span></code> (Browser Pane), conforme indicado na figura abaixo.</p>

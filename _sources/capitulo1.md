@@ -177,7 +177,7 @@ Exemplos:
 {
   "nome": "João Silva",
   "idade": 30,
-   endereço": {
+   "endereço": {
     "rua": "Rua das Flores",
     "cidade": "São Paulo",
     "CEP": "01002-000"
@@ -378,7 +378,7 @@ Um Sistema de Gerenciamento de Banco de Dados (SGDB ou DBMS, do inglês *Databas
 - **Metadados:** Mantém informação sobre a estrutura do banco de dados, tipos de dados, restrições e relacionamentos entre os dados.
 
 
-#### Os Sistemas de Gerenciamento de Bancos de Dados Relacionais (SGBDRs) mais populares atualmente incluem:
+Os Sistemas de Gerenciamento de Bancos de Dados Relacionais (SGBDRs) mais populares atualmente incluem:
 
 - **Oracle Database:** Altamente reconhecido em empresas de grande porte, oferece recursos extensivos para computação em nuvem, armazenamento de dados, e várias outras funcionalidades de alto desempenho.
 
